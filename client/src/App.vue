@@ -1,6 +1,7 @@
 <template>
   <section>
-    
+    <h1>Countdown Time!</h1>
+
   </section>
 </template>
 
