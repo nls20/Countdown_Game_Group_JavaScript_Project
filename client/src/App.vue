@@ -3,6 +3,7 @@
     <h1>Countdown Time!</h1>
     <timer/>
     <letters-board/>
+    <letter-input/>
   </section>
 </template>
 
