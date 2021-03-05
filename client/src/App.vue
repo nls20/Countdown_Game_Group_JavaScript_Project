@@ -4,6 +4,7 @@
     <timer/>
     <letters-board/>
     <letter-input/>
+    <submit-answers/>
   </section>
 </template>
 
