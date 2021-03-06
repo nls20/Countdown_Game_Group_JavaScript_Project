@@ -3,7 +3,7 @@
     <h1>Countdown Time!</h1>
     <button @click="checkWord">test</button>
     <timer/>
-    <letters-board/>
+    <letters-board :letters="letters"/>
     <letter-input/>
     <submit-answers/>
   </section>
@@ -14,7 +14,15 @@ import Timer from '@/components/Timer.vue'
 import LetterBoard from '@/components/LetterBoard.vue'
 import LetterInput from '@/components/LetterInput.vue'
 import SubmitAnswers from '@/components/SubmitAnswers.vue'
+
+import {eventBus} from '@/main.js'
   export default {
+
+    data(){
+      return {
+        letters: []
+      }
+    },
 
     methods:{
       checkWord(word){
@@ -28,6 +36,9 @@ import SubmitAnswers from '@/components/SubmitAnswers.vue'
             }
           })
       }
+    },
+    mounted(){
+      eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
     },
     
     components:{

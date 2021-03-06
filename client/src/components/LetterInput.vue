@@ -27,7 +27,7 @@ import {eventBus} from '@/main.js'
                 this.sendEventBus()
             },
             sendEventBus(){
-                eventBus.$emit('add-consonant', this.letterToAdd)
+                eventBus.$emit('add-letter', this.letterToAdd)
             }
         }
     }

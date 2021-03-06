@@ -1,15 +1,15 @@
 <template>
     <section >
         <div id="letter-grid">
-            <p id="first-letter">A</p>
-            <p id="second-letter"></p>
-            <p id="third-letter"></p>
-            <p id="fourth-letter"></p>
-            <p id="fifth-letter"></p>
-            <p id="sixth-letter"></p>
-            <p id="seventh-letter"></p>
-            <p id="eighth-letter"></p>
-            <p id="ninth-letter"></p>
+            <p id="first-letter">{{letters[0]}}</p>
+            <p id="second-letter">{{letters[1]}}</p>
+            <p id="third-letter">{{letters[2]}}</p>
+            <p id="fourth-letter">{{letters[3]}}</p>
+            <p id="fifth-letter">{{letters[4]}}</p>
+            <p id="sixth-letter">{{letters[5]}}</p>
+            <p id="seventh-letter">{{letters[6]}}</p>
+            <p id="eighth-letter">{{letters[7]}}</p>
+            <p id="ninth-letter">{{letters[8]}}</p>
         </div>
 
   </section>
@@ -17,6 +17,8 @@
 
 <script>
     export default {
+        name: 'letter-board',
+        props: ['letters'],
         data(){
             return {
                 selected: true
@@ -39,6 +41,9 @@
     color: white;
     padding:8px;
     border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    font-size: xx-large;
 }
 
 
