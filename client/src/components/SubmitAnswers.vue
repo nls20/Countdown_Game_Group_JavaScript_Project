@@ -23,7 +23,7 @@ import {eventBus} from '@/main.js'
         return{
           playerOneWord: "",
           playerTwoWord: "",
-          timerRunning: true
+          timerRunning: false
         }
       },
       methods:{

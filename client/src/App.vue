@@ -40,7 +40,7 @@ import {eventBus} from '@/main.js'
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
 
-      eventBus.$on('reset', () => {
+      eventBus.$on('reset-everything', () => {
         this.letters = []
         //  reset timer
       })
