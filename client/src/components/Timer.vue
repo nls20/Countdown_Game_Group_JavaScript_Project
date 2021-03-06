@@ -1,5 +1,5 @@
 <template>
-    <section @focus="startTimer">
+    <section >
         <h1  id="timer"></h1>
   </section>
 </template>
