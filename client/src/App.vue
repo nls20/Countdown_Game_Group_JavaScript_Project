@@ -31,26 +31,24 @@ import {eventBus} from '@/main.js'
           .then((res) => res.json())
           .then((data) => {
             if (word === data[0].word){
-              console.log('it is a word');
               this.createSubmittedWordsArray(word, index)
             }
           })
           .catch((err) => {
-            console.log(`${word} is not a word`);
             this.createSubmittedWordsArray("", index)
           })
       },
       createSubmittedWordsArray(word, index){
-        this.submittedWords.index = word
+        this.submittedWords[index] = word
       }
     },
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
 
       eventBus.$on('player-words', (words) => {
-        for (let [word, index] of Object.values(words)){
+        Object.values(words).forEach((word, index) => {
           this.checkWord(word, index)
-        }
+        })
       })
 
       eventBus.$on('timer-finished', () => this.timerEnded = true)
