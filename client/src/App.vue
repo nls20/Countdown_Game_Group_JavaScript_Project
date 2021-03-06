@@ -39,6 +39,11 @@ import {eventBus} from '@/main.js'
     },
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
+
+      eventBus.$on('reset', () => {
+        this.letters = []
+        //  reset timer
+      })
     },
     
     components:{
