@@ -10,7 +10,7 @@
         <input type="submit" value="Submit words">
       </form>
 
-      <button v-if="!timerRunning" @click="resetEverything">Reset</button>
+      <button v-if="submitClicked" @click="resetEverything">Reset</button>
     
   </section>
 </template>
@@ -23,7 +23,7 @@ import {eventBus} from '@/main.js'
         return{
           playerOneWord: "",
           playerTwoWord: "",
-          timerRunning: false
+          submitClicked: false
         }
       },
       methods:{
@@ -33,6 +33,7 @@ import {eventBus} from '@/main.js'
             playerTwoWord: this.playerTwoWord
           }
           eventBus.$emit('player-words', words)
+          this.submitClicked = true
         },
         resetEverything(){
           this.playerOneWord = ""
