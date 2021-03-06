@@ -4,7 +4,7 @@
     <timer v-if="letters.length === 9" :start="true" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
-    <submit-answers v-if="timerEnded"/>
+    <submit-answers />
   </section>
 </template>
 
@@ -20,25 +20,38 @@ import {eventBus} from '@/main.js'
     data(){
       return {
         letters: [],
-        timerEnded: false
+        timerEnded: false,
+        submittedWords: {}
       }
     },
 
     methods:{
-      checkWord(word){
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/letter`)
+      checkWord(word, index){
+        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
           .then((data) => {
-            if ('letter' === data[0].word){
+            if (word === data[0].word){
               console.log('it is a word');
-            } else {
-              console.log('not a word');
+              this.createSubmittedWordsArray(word, index)
             }
           })
+          .catch((err) => {
+            console.log(`${word} is not a word`);
+            this.createSubmittedWordsArray("", index)
+          })
+      },
+      createSubmittedWordsArray(word, index){
+        this.submittedWords.index = word
       }
     },
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
+
+      eventBus.$on('player-words', (words) => {
+        for (let [word, index] of Object.values(words)){
+          this.checkWord(word, index)
+        }
+      })
 
       eventBus.$on('timer-finished', () => this.timerEnded = true)
 
