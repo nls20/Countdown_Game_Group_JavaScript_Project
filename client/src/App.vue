@@ -1,10 +1,9 @@
 <template>
   <section>
     <h1>Countdown Time!</h1>
-    <button @click="checkWord">test</button>
-    <timer/>
+    <timer v-if="letters.length === 9" :start="true" />
     <letters-board :letters="letters"/>
-    <letter-input/>
+    <letter-input v-if="letters.length < 9" />
     <submit-answers/>
   </section>
 </template>
