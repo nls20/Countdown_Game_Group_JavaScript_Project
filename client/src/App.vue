@@ -4,7 +4,7 @@
     <timer v-if="letters.length === 9" :start="true" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
-    <submit-answers/>
+    <submit-answers v-if="timerEnded"/>
   </section>
 </template>
 
@@ -19,7 +19,8 @@ import {eventBus} from '@/main.js'
 
     data(){
       return {
-        letters: []
+        letters: [],
+        timerEnded: false
       }
     },
 
@@ -39,8 +40,11 @@ import {eventBus} from '@/main.js'
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
 
+      eventBus.$on('timer-finished', () => this.timerEnded = true)
+
       eventBus.$on('reset-everything', () => {
         this.letters = []
+        this.timerEnded = false
         //  reset timer
       })
     },
