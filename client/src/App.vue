@@ -53,7 +53,7 @@ import {eventBus} from '@/main.js'
         // console.log(this.submittedWords);
       },
       compareWordsLength(){
-        let longestWord = []
+        let highestPlayer = {}
         console.log('word row', this.submittedWords);
         for (let wordRow of this.submittedWords){
           console.log('length', wordRow);
@@ -63,13 +63,21 @@ import {eventBus} from '@/main.js'
             longestWord = wordRow
           }
         }
+        this.calculateScore(highestPlayer)
 
       },
       getDefinition(word){
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
           .then((data) => this.definition = data[0].meanings[0].definitions[0].definition)
-        },
+      },
+      calculateScore(player){
+        if (player.word.length === 9){
+          player.score = 18
+        } else {
+          player.score = player.word.length
+        }
+      },
       checkEnterWordIsAllowed(){
         if (this.submittedWords.length === this.numberOfPlayers){
             for (let wordRow of this.submittedWords){
