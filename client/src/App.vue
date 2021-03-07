@@ -4,6 +4,8 @@
     <timer v-if="letters.length === 9" :start="true" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
+    <!-- <letters-board :letters="letters"/>
+    <letter-input/> -->
     <submit-answers />
   </section>
 </template>

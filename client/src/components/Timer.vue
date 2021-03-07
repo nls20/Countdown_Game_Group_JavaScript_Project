@@ -43,9 +43,8 @@ import {eventBus} from '@/main.js'
 h2 {
   font-size: 30px;
   text-align: center;
-  border: solid;
   border-width: 2px;
-  border-color: black;
+  border: solid darkblue 2px;
   width: 200px;
   background-color: white;
 }

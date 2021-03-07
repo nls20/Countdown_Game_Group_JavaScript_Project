@@ -52,9 +52,6 @@ section{
     font-size: xx-large;
     justify-content: center;
     align-items: center;
-    /* border: solid;
-    border-color: white;
-    border-width: 4px; */
 }
 
 #letter-grid {
