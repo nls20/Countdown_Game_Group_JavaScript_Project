@@ -37,16 +37,16 @@ import {eventBus} from '@/main.js'
           .then((data) => {
             if (word === data[0].word){
               this.checkEnterWordIsAllowed(word)
+              //improve this, is there a way to make the output of a function equal to a variable?
               word = this.currentWord
               this.currentWord = ""
-
-              console.log('output word', word);
               this.createplayersArray(word, index)
 
               if (word.length >= 8) {
                 this.getDefinition(word, index)
               }
-              this.calculateScore(word, index)
+              // this.calculateScore(word, index)
+              this.compareWordsLength()
             }
           })
           .catch((err) => {
@@ -57,22 +57,22 @@ import {eventBus} from '@/main.js'
       },
 
       createplayersArray(word, index){
-        this.players.push({name: index, writtenWord: word, score: 0})
+        this.players.push({name: index, word: word, score: 0})
         //done
       },
 
       compareWordsLength(){
-        let highestPlayer = {}
-        console.log('word row', this.players);
-        for (let wordRow of this.players){
-          console.log('length', wordRow);
-          console.log('longest word', longestWord[0].length);
-          if (wordRow.writtenWord.length > longestWord[0].length){
-            console.log(`${key} is longer`);
-            longestWord = wordRow
+        if (this.numberOfPlayers === this.players.length){
+          let longestWordLength = {word: ""}
+          for (let player of this.players){
+            let word = player.word
+            if (word.length > longestWordLength.word.length){
+              longestWordLength = player
+            }
           }
+          console.log('to calc score', longestWordLength.name);
+          this.calculateScore(longestWordLength)
         }
-        this.calculateScore(highestPlayer)
       },
 
       getDefinition(word, index){
@@ -88,13 +88,15 @@ import {eventBus} from '@/main.js'
           })
       },
 
-      calculateScore(word, index){
+      calculateScore(passedPlayer){
         this.players.filter((player) => {
-          if (player.name === index){
-            if (word.length === 9){
-              player.score = 18
+          if (player.name === passedPlayer.name){
+            console.log('in if');
+            if (passedPlayer.word.length === 9){
+              player.score += 18
             } else {
-              player.score = word.length
+              console.log('in else');
+              player.score += word.length
             }
           }
         })
@@ -110,11 +112,11 @@ import {eventBus} from '@/main.js'
             board[board.indexOf(letter)] = ""
             wordCount++
             if (wordCount === word.length){
-              console.log('output', word);
               this.currentWord = word
             }
           } else {
-            return "notihgn"
+            //might not be necessary?
+            this.currentWord = ""
           }
         })
       }
