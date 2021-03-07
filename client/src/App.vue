@@ -23,7 +23,7 @@ import {eventBus} from '@/main.js'
       return {
         letters: ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd'],
         timerEnded: false,
-        submittedWords: [],
+        players: [],
         numberOfPlayers: 2,
         definition: "",
         currentWord: ""
@@ -41,25 +41,26 @@ import {eventBus} from '@/main.js'
               this.currentWord = ""
 
               console.log('output word', word);
-              this.createSubmittedWordsArray(word, index)
+              this.createplayersArray(word, index)
 
               if (word.length >= 8) {
-                this.getDefinition(word)
+                this.getDefinition(word, index)
               }
             }
           })
           .catch((err) => {
-            this.createSubmittedWordsArray("", index)
+            this.createplayersArray("", index)
           })
       },
-      createSubmittedWordsArray(word, index){
-        this.submittedWords.push({name: index, writtenWord: word})
-        // console.log(this.submittedWords);
+
+      createplayersArray(word, index){
+        this.players.push({name: index, writtenWord: word})
       },
+
       compareWordsLength(){
         let highestPlayer = {}
-        console.log('word row', this.submittedWords);
-        for (let wordRow of this.submittedWords){
+        console.log('word row', this.players);
+        for (let wordRow of this.players){
           console.log('length', wordRow);
           console.log('longest word', longestWord[0].length);
           if (wordRow.writtenWord.length > longestWord[0].length){
@@ -68,13 +69,20 @@ import {eventBus} from '@/main.js'
           }
         }
         this.calculateScore(highestPlayer)
-
       },
-      getDefinition(word){
+
+      getDefinition(word, index){
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
-          .then((data) => this.definition = data[0].meanings[0].definitions[0].definition)
+          .then((data) => {
+            this.players.filter((player) => {
+              if (index === player.name){
+                player.definition = data[0].meanings[0].definitions[0].definition
+              }
+            })
+          })
       },
+
       calculateScore(player){
         if (player.word.length === 9){
           player.score = 18
@@ -82,19 +90,15 @@ import {eventBus} from '@/main.js'
           player.score = player.word.length
         }
       },
+
       checkEnterWordIsAllowed(word){
-        // console.log('in enter word', word);
           const splitWord = [...word]
-          // console.log('after split', word);
           let wordCount = 0
           let board = this.letters.map((letter) => letter.toLowerCase())
           splitWord.forEach((letter) => {
             if (board.includes(letter)){
               board[board.indexOf(letter)] = ""
               wordCount++
-              // console.log('word', word);
-              // console.log('count', wordCount);
-              // console.log('wordlength', word.length);
               if (wordCount === word.length){
                 console.log('output', word);
                 this.currentWord = word
@@ -110,7 +114,6 @@ import {eventBus} from '@/main.js'
 
       eventBus.$on('player-words', (words) => {
         words.forEach((word) => {
-          // console.log('word', word);
           this.checkWord(word.word, word.name)
         })
       })
@@ -118,9 +121,9 @@ import {eventBus} from '@/main.js'
       eventBus.$on('timer-finished', () => this.timerEnded = true)
 
       eventBus.$on('reset-everything', () => {
-        this.letters = ['c','h','e','e','s','e']
+        this.letters = ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd']
         this.timerEnded = false
-        this.submittedWords = []
+        this.players = []
       })
     },
     
