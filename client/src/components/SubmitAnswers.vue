@@ -17,9 +17,6 @@
           <button v-if="submitClicked" @click="resetEverything">Reset</button>
         </div>
       </form>
-
-      
-    
   </section>
 </template>
 
@@ -36,10 +33,16 @@ import {eventBus} from '@/main.js'
       },
       methods:{
         submitWords(){
-          const words = {
-            playerOneWord: this.playerOneWord,
-            playerTwoWord: this.playerTwoWord
-          }
+          const words = [
+            {
+              name: "Player One", 
+              word: this.playerOneWord
+            },
+            {
+              name: "Player Two",
+              word: this.playerTwoWord
+            }
+          ]
           eventBus.$emit('player-words', words)
           this.submitClicked = true
         },
@@ -58,7 +61,6 @@ import {eventBus} from '@/main.js'
 .player-input{
   display: grid;
   justify-content: center;
-  /* grid-template-rows: 1fr */
 }
 
 .player-input>label{
