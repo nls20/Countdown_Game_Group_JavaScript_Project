@@ -19,9 +19,10 @@ import {eventBus} from '@/main.js'
 
     data(){
       return {
-        letters: [],
+        letters: ['c', 'e', 'h', 'e', 's', 'e'],
         timerEnded: false,
-        submittedWords: {}
+        submittedWords: {},
+        numberOfPlayers: 2,
       }
     },
 
@@ -31,15 +32,33 @@ import {eventBus} from '@/main.js'
           .then((res) => res.json())
           .then((data) => {
             if (word === data[0].word){
-              this.createSubmittedWordsArray(word, index)
+              this.createSubmittedWordsObject(word, index)
+              this.checkEnterWordIsAllowed()
             }
           })
           .catch((err) => {
-            this.createSubmittedWordsArray("", index)
+            this.createSubmittedWordsObject("", index)
+            this.checkEnterWordIsAllowed()
           })
       },
-      createSubmittedWordsArray(word, index){
+      createSubmittedWordsObject(word, index){
         this.submittedWords[index] = word
+      },
+      checkEnterWordIsAllowed(){
+        if (Object.keys(this.submittedWords).length === this.numberOfPlayers){
+            for (let [key, word] of Object.entries(this.submittedWords)){
+              const splitWord = [...word]
+              let board = this.letters.map((letter) => letter.toLowerCase())
+              splitWord.forEach((letter, index) => {
+                if (board.includes(letter)){
+                  const boardIndex = board.indexOf(letter)
+                  board[boardIndex] = ""
+                } else {
+                  this.submittedWords[key] = ""
+                }
+              })
+          }
+        }
       }
     },
     mounted(){
@@ -47,7 +66,7 @@ import {eventBus} from '@/main.js'
 
       eventBus.$on('player-words', (words) => {
         Object.values(words).forEach((word, index) => {
-          this.checkWord(word, index)
+          this.checkWord(word, `Player ${index+1}`)
         })
       })
 
@@ -56,7 +75,6 @@ import {eventBus} from '@/main.js'
       eventBus.$on('reset-everything', () => {
         this.letters = []
         this.timerEnded = false
-        //  reset timer
       })
     },
     
