@@ -1,6 +1,6 @@
 <template>
     <section >
-        <h1  id="timer"></h1>
+        <h2  id="timer"></h2>
   </section>
 </template>
 
@@ -21,7 +21,11 @@ import {eventBus} from '@/main.js'
             if (this.start){
                 let countdownTimer = 3
                 let countdownTimerFunction = setInterval(function(){
-                    document.getElementById('timer').textContent='00:'+countdownTimer;
+                    if (countdownTimer <10){
+                        document.getElementById('timer').textContent='00:0'+countdownTimer;
+                    } else {
+                        document.getElementById('timer').textContent='00:'+countdownTimer;
+                    }
                     countdownTimer--;
                     if (countdownTimer < 0) {
                         clearInterval(countdownTimerFunction);
@@ -35,6 +39,21 @@ import {eventBus} from '@/main.js'
 </script>
 
 <style lang="css" scoped>
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+  border: solid;
+  border-width: 2px;
+  border-color: black;
+  width: 200px;
+  background-color: white;
+}
+
+section {
+    display: grid;
+    justify-content: center;
+}
 
 </style>
 

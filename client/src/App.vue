@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Countdown Time!</h1>
+    <h1>COUNTDOWN</h1>
     <timer v-if="letters.length === 9" :start="true" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
@@ -35,9 +35,7 @@ import {eventBus} from '@/main.js'
             if (word === data[0].word){
               this.createSubmittedWordsArray(word, index)
               this.checkEnterWordIsAllowed()
-              console.log('length', word.length);
               if (word.length >= 8) {
-                console.log('in if');
                 this.getDefinition(word)
               }
               // console.log('check', word);
@@ -79,7 +77,7 @@ import {eventBus} from '@/main.js'
         }
       },
       checkEnterWordIsAllowed(){
-        if (this.submittedWords.length === this.numberOfPlayers){
+        if (this.submittedWords.length >= this.numberOfPlayers){
             for (let wordRow of this.submittedWords){
               // console.log('words', this.submittedWords);
               // console.log('written', wordRow.writtenWord);
@@ -104,7 +102,6 @@ import {eventBus} from '@/main.js'
 
       eventBus.$on('player-words', (words) => {
         Object.values(words).forEach((word, index) => {
-          console.log('word', word);
           this.checkWord(word, `Player ${index+1}`)
         })
       })
@@ -128,5 +125,19 @@ import {eventBus} from '@/main.js'
 </script>
 
 <style lang="css" scoped>
+
+* {
+  font-family: sans-serif;
+}
+section{
+  background-color: rgb(224, 240, 255);
+  margin: -10px;
+  padding: 10px;
+}
+
+h1 {
+  font-size: 40px;
+  text-align: center;
+}
 
 </style>

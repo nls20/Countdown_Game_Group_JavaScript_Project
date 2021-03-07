@@ -1,5 +1,6 @@
 <template>
     <section >
+        
         <div id="letter-grid">
             <p id="first-letter">{{letters[0]}}</p>
             <p id="second-letter">{{letters[1]}}</p>
@@ -29,6 +30,11 @@
 
 <style lang="css" scoped>
 
+section{
+    display: flex;
+    justify-content: center;
+}
+
 #letter-grid{
     display: flex;
     flex-wrap: wrap;
@@ -36,16 +42,27 @@
 }
 
 #letter-grid> p{
-    margin: 6px;
+    display: grid;
+    margin: 4px;
     background-color: blue;
     color: white;
     padding:8px;
-    border-radius: 4px;
     width: 50px;
     height: 50px;
     font-size: xx-large;
+    justify-content: center;
+    align-items: center;
+    /* border: solid;
+    border-color: white;
+    border-width: 4px; */
 }
 
+#letter-grid {
+    background-color: white;
+    border: solid darkblue 2px;
+    border-width: 4px;
+    width: 668px;
+}
 
 
 </style>
