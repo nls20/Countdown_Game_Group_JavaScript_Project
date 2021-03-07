@@ -46,15 +46,19 @@ import {eventBus} from '@/main.js'
               if (word.length >= 8) {
                 this.getDefinition(word, index)
               }
+              this.calculateScore(word, index)
             }
           })
           .catch((err) => {
             this.createplayersArray("", index)
           })
+
+          //done
       },
 
       createplayersArray(word, index){
-        this.players.push({name: index, writtenWord: word})
+        this.players.push({name: index, writtenWord: word, score: 0})
+        //done
       },
 
       compareWordsLength(){
@@ -72,6 +76,7 @@ import {eventBus} from '@/main.js'
       },
 
       getDefinition(word, index){
+        //done
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
           .then((data) => {
@@ -83,30 +88,35 @@ import {eventBus} from '@/main.js'
           })
       },
 
-      calculateScore(player){
-        if (player.word.length === 9){
-          player.score = 18
-        } else {
-          player.score = player.word.length
-        }
+      calculateScore(word, index){
+        this.players.filter((player) => {
+          if (player.name === index){
+            if (word.length === 9){
+              player.score = 18
+            } else {
+              player.score = word.length
+            }
+          }
+        })
       },
 
       checkEnterWordIsAllowed(word){
-          const splitWord = [...word]
-          let wordCount = 0
-          let board = this.letters.map((letter) => letter.toLowerCase())
-          splitWord.forEach((letter) => {
-            if (board.includes(letter)){
-              board[board.indexOf(letter)] = ""
-              wordCount++
-              if (wordCount === word.length){
-                console.log('output', word);
-                this.currentWord = word
-              }
-            } else {
-              return "notihgn"
+        //done
+        const splitWord = [...word]
+        let wordCount = 0
+        let board = this.letters.map((letter) => letter.toLowerCase())
+        splitWord.forEach((letter) => {
+          if (board.includes(letter)){
+            board[board.indexOf(letter)] = ""
+            wordCount++
+            if (wordCount === word.length){
+              console.log('output', word);
+              this.currentWord = word
             }
-          })
+          } else {
+            return "notihgn"
+          }
+        })
       }
     },
     mounted(){
