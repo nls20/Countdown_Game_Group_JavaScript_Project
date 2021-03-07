@@ -45,6 +45,7 @@ import {eventBus} from '@/main.js'
           ]
           eventBus.$emit('player-words', words)
           this.submitClicked = true
+          console.log('click');
         },
         resetEverything(){
           this.playerOneWord = ""

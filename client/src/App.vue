@@ -25,7 +25,8 @@ import {eventBus} from '@/main.js'
         timerEnded: false,
         submittedWords: [],
         numberOfPlayers: 2,
-        definition: ""
+        definition: "",
+        currentWord: ""
       }
     },
 
@@ -35,17 +36,20 @@ import {eventBus} from '@/main.js'
           .then((res) => res.json())
           .then((data) => {
             if (word === data[0].word){
+              this.checkEnterWordIsAllowed(word)
+              word = this.currentWord
+              this.currentWord = ""
+
+              console.log('output word', word);
               this.createSubmittedWordsArray(word, index)
-              this.checkEnterWordIsAllowed()
+
               if (word.length >= 8) {
                 this.getDefinition(word)
               }
-              // console.log('check', word);
             }
           })
           .catch((err) => {
             this.createSubmittedWordsArray("", index)
-            // console.log('error', word);
           })
       },
       createSubmittedWordsArray(word, index){
@@ -78,33 +82,36 @@ import {eventBus} from '@/main.js'
           player.score = player.word.length
         }
       },
-      checkEnterWordIsAllowed(){
-        if (this.submittedWords.length >= this.numberOfPlayers){
-            for (let wordRow of this.submittedWords){
-              // console.log('words', this.submittedWords);
-              // console.log('written', wordRow.writtenWord);
-              const splitWord = [...wordRow.writtenWord]
-              let board = this.letters.map((letter) => letter.toLowerCase())
-              // console.log('board', board);
-              splitWord.forEach((letter, index) => {
-                if (board.includes(letter)){
-                  const boardIndex = board.indexOf(letter)
-                  board[boardIndex] = ""
-                } else {
-                  this.wordRow.writtenWord =""
-                }
-              })
-          }
-          this.compareWordsLength()
-        }
+      checkEnterWordIsAllowed(word){
+        // console.log('in enter word', word);
+          const splitWord = [...word]
+          // console.log('after split', word);
+          let wordCount = 0
+          let board = this.letters.map((letter) => letter.toLowerCase())
+          splitWord.forEach((letter) => {
+            if (board.includes(letter)){
+              board[board.indexOf(letter)] = ""
+              wordCount++
+              // console.log('word', word);
+              // console.log('count', wordCount);
+              // console.log('wordlength', word.length);
+              if (wordCount === word.length){
+                console.log('output', word);
+                this.currentWord = word
+              }
+            } else {
+              return "notihgn"
+            }
+          })
       }
     },
     mounted(){
       eventBus.$on('add-letter', letter => this.letters.push(letter.toUpperCase()))
 
       eventBus.$on('player-words', (words) => {
-        Object.values(words).forEach((word, index) => {
-          this.checkWord(word, `Player ${index+1}`)
+        words.forEach((word) => {
+          // console.log('word', word);
+          this.checkWord(word.word, word.name)
         })
       })
 
