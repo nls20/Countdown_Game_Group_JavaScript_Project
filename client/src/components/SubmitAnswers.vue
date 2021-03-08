@@ -8,7 +8,7 @@
             <p v-if="submitClicked && definitionOneClicked">
               {{ playerOneMeaning }}
             </p>
-            <button v-if="submitClicked && !definitionOneClicked" @click="getWordDefinition('Player One')">Definition</button>
+            <button class="definition-button" v-if="submitClicked && !definitionOneClicked" @click="getWordDefinition('Player One')">Definition</button>
           </div>
 
           <div class="player-input">
@@ -17,7 +17,7 @@
             <p v-if="submitClicked && definitionTwoClicked">
               {{ playerTwoMeaning }}
             </p>
-            <button v-if="submitClicked && !definitionTwoClicked" @click="getWordDefinition('Player Two')">Definition</button>
+            <button class="definition-button" v-if="submitClicked && !definitionTwoClicked" @click="getWordDefinition('Player Two')">Definition</button>
           </div>
         </div>
         <div id="submit-button" >
@@ -186,6 +186,24 @@ import {eventBus} from '@/main.js'
   margin: 20px 40px;
   width: 180px;
   height: 100px
+}
+
+.definition-button {
+  box-shadow:inset 0px 1px 0px 0px #78f098;
+	background:linear-gradient(to bottom, #69e356 5%, #4acc5d 100%);
+	background-color:#69e356;
+	border-radius:6px;
+	border:1px solid #7aad23;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #74a822;
+  margin: 20px 50px;
 }
 
 </style>
