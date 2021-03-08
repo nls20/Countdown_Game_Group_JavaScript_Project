@@ -38,7 +38,7 @@ import {eventBus} from '@/main.js'
           .then((res) => res.json())
           .then((data) => {
             if (word === data[0].word){
-              console.log('check word if', word);
+              // console.log('check word if', word);
               this.checkEnterWordIsAllowed(word)
               //improve this, is there a way to make the output of a function equal to a variable?
               word = this.currentWord
@@ -49,12 +49,16 @@ import {eventBus} from '@/main.js'
                 this.getDefinition(word, index)
               }
               this.enteredWords.push(word)
+              // console.log(this.enteredWords);
               this.compareWordsLength()
             }
           })
           .catch((err) => {
+            console.log('error');
             this.createplayersArray("", index)
             this.enteredWords.push(word)
+            this.compareWordsLength()
+            console.log(this.enteredWords);
           })
       },
 
@@ -71,7 +75,7 @@ import {eventBus} from '@/main.js'
       },
 
       compareWordsLength(){
-        if (this.numberOfPlayers === this.players.length){
+        if (this.numberOfPlayers === this.enteredWords.length){
           let highestPlayers = [{word: ""}]
           for (let player of this.players){
             let word = player.word
@@ -98,15 +102,20 @@ import {eventBus} from '@/main.js'
       },
 
       calculateScore(passedPlayer){
+        console.log('player length', passedPlayer.length);
         if (passedPlayer.length >1){
           console.log('in if');
           for (let player of passedPlayer){
             this.addScores(player)
           }
         } else {
+          console.log('in else');
           this.players.filter((player) => {
-            if (player.name === passedPlayer.name){
-              this.addScores(passedPlayer)
+            console.log('player', player.name);
+            console.log('passed player', passedPlayer[0].name);
+            if (player.name === passedPlayer[0].name){
+              console.log('in more if', player.name);
+              this.addScores(passedPlayer[0])
             }
           })
         }
@@ -116,7 +125,9 @@ import {eventBus} from '@/main.js'
         if (passedPlayer.word.length === 9){
             passedPlayer.score += 18
           } else {
+            console.log('player score before', passedPlayer.word.length);
             passedPlayer.score += passedPlayer.word.length
+            console.log('player score after', passedPlayer.score);
           }
       },
 
@@ -140,6 +151,7 @@ import {eventBus} from '@/main.js'
 
       eventBus.$on('player-words', (words) => {
         words.forEach((word) => {
+          // console.log('word', word);
           this.checkWord(word.word, word.name)
         })
       })
@@ -150,6 +162,10 @@ import {eventBus} from '@/main.js'
         this.letters = ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd']
         this.timerEnded = false
         this.enteredWords = []
+        for (let player of this.players){
+          player.word = ""
+          player.currentScore = 0
+        }
       })
     },
     
