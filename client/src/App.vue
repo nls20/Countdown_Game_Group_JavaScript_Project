@@ -40,25 +40,24 @@ import {eventBus} from '@/main.js'
               //improve this, is there a way to make the output of a function equal to a variable?
               word = this.currentWord
               this.currentWord = ""
+              console.log('in normal');
               this.createplayersArray(word, index)
 
               if (word.length >= 8) {
                 this.getDefinition(word, index)
               }
-              // this.calculateScore(word, index)
               this.compareWordsLength()
+              console.log('players', this.players);
             }
           })
           .catch((err) => {
+            console.log('in catch');
             this.createplayersArray("", index)
           })
-
-          //done
       },
 
       createplayersArray(word, index){
         this.players.push({name: index, word: word, score: 0})
-        //done
       },
 
       compareWordsLength(){
@@ -70,13 +69,11 @@ import {eventBus} from '@/main.js'
               longestWordLength = player
             }
           }
-          console.log('to calc score', longestWordLength.name);
           this.calculateScore(longestWordLength)
         }
       },
 
       getDefinition(word, index){
-        //done
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
           .then((data) => {
@@ -90,20 +87,20 @@ import {eventBus} from '@/main.js'
 
       calculateScore(passedPlayer){
         this.players.filter((player) => {
+          console.log('player', player);
           if (player.name === passedPlayer.name){
-            console.log('in if');
+            console.log('in if', passedPlayer.word.length);
             if (passedPlayer.word.length === 9){
               player.score += 18
             } else {
               console.log('in else');
-              player.score += word.length
+              player.score += passedPlayer.word.length
             }
           }
         })
       },
 
       checkEnterWordIsAllowed(word){
-        //done
         const splitWord = [...word]
         let wordCount = 0
         let board = this.letters.map((letter) => letter.toLowerCase())
