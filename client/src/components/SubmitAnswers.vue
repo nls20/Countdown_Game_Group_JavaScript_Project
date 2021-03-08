@@ -131,6 +131,7 @@ import Results from './Results.vue'
 .player-input{
   display: grid;
   justify-content: center;
+  margin: 0px 30px;
 }
 
 .player-input>label{

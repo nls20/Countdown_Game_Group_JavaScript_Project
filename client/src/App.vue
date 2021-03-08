@@ -1,10 +1,12 @@
-<template>
-  <section>
+<template >
+<section >
+  <section id="background">
     <h1>COUNTDOWN</h1>
     <timer v-if="letters.length === 9" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
     <submit-answers :players="players"/>
+  </section>
   </section>
 </template>
 
@@ -152,15 +154,23 @@ import {eventBus} from '@/main.js'
 * {
   font-family: sans-serif;
 }
+
+#background{
+  background-image: url('https://www.clickz.com/wp-content/uploads/2017/01/maxresdefault.jpg');
+  
+}
+
 section{
-  background-color: rgb(224, 240, 255);
+  
   margin: -10px;
   padding: 10px;
+  
 }
 
 h1 {
   font-size: 40px;
   text-align: center;
+  margin-bottom: 150px;
 }
 
 </style>
