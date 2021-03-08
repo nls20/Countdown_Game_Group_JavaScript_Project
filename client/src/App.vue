@@ -87,13 +87,10 @@ import {eventBus} from '@/main.js'
 
       calculateScore(passedPlayer){
         this.players.filter((player) => {
-          console.log('player', player);
           if (player.name === passedPlayer.name){
-            console.log('in if', passedPlayer.word.length);
             if (passedPlayer.word.length === 9){
               player.score += 18
             } else {
-              console.log('in else');
               player.score += passedPlayer.word.length
             }
           }
