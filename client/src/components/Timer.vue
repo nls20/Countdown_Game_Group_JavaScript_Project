@@ -1,6 +1,8 @@
 <template>
     <section >
-        <h2  id="timer"></h2>
+        <h2 v-if="countdownTimer<10" id="timer">00:0{{countdownTimer}}</h2>
+        <h2 v-if="countdownTimer>=10" id="timer">00:{{countdownTimer}}</h2>
+        <h2 v-if="countdownTimer === 'Time Up'" id="timer">Time Up</h2>
   </section>
 </template>
 
@@ -8,32 +10,41 @@
 import {eventBus} from '@/main.js'
     export default {
         name: 'timer',
-        props: ['start'],
         data(){
             return{
+                countdownTimer: 3
             }
         },
-        methods: {
+        computed: {
+            
             
             
         },
         mounted() {
-            if (this.start){
-                let countdownTimer = 3
-                let countdownTimerFunction = setInterval(function(){
-                    if (countdownTimer <10){
-                        document.getElementById('timer').textContent='00:0'+countdownTimer;
-                    } else {
-                        document.getElementById('timer').textContent='00:'+countdownTimer;
-                    }
-                    countdownTimer--;
-                    if (countdownTimer < 0) {
-                        clearInterval(countdownTimerFunction);
-                        document.getElementById('timer').textContent = 'Time up'
+            let changeTimer = setInterval(() => {
+                    this.countdownTimer--
+                    console.log('timer', this.countdownTimer);
+                    if (this.countdownTimer<= 0){
+                        clearInterval(changeTimer)
+                        this.countdownTimer = 'Time Up'
                         eventBus.$emit('timer-finished')
                     }
-                }, 1000);
-            }
+                }, 1000)
+                
+                console.log('timer', this.countdownTimer);
+            // let countdownTimerFunction = setInterval(function(){
+            //     if (countdownTimer <10){
+            //         document.getElementById('timer').textContent='00:0'+countdownTimer;
+            //     } else {
+            //         document.getElementById('timer').textContent='00:'+countdownTimer;
+            //     }
+            //     countdownTimer--;
+            //     if (countdownTimer < 0) {
+            //         clearInterval(countdownTimerFunction);
+            //         document.getElementById('timer').textContent = 'Time up'
+            //         eventBus.$emit('timer-finished')
+            //     }
+            // }, 1000);
         }
     }
 </script>

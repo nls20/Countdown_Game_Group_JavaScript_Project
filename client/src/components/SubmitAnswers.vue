@@ -58,6 +58,8 @@ import {eventBus} from '@/main.js'
 
 <style lang="css" scoped>
 
+
+
 .player-input{
   display: grid;
   justify-content: center;

@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>COUNTDOWN</h1>
-    <timer v-if="letters.length === 9" :start="true" />
+    <timer v-if="letters.length === 9" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
     <!-- <letters-board :letters="letters"/>
@@ -22,8 +22,10 @@ import {eventBus} from '@/main.js'
     data(){
       return {
         letters: ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd'],
+        // letters:[],
         timerEnded: false,
         players: [],
+        enteredWords: [],
         numberOfPlayers: 2,
         definition: "",
         currentWord: ""
@@ -40,24 +42,32 @@ import {eventBus} from '@/main.js'
               //improve this, is there a way to make the output of a function equal to a variable?
               word = this.currentWord
               this.currentWord = ""
-              console.log('in normal');
               this.createplayersArray(word, index)
+              console.log('word', word);
 
               if (word.length >= 8) {
                 this.getDefinition(word, index)
               }
+              this.enteredWords.push(word)
               this.compareWordsLength()
-              console.log('players', this.players);
             }
           })
           .catch((err) => {
-            console.log('in catch');
             this.createplayersArray("", index)
+            this.enteredWords.push(word)
           })
       },
 
-      createplayersArray(word, index){
-        this.players.push({name: index, word: word, score: 0})
+      createplayersArray(word, name){
+        if (this.players.length === this.numberOfPlayers){
+          this.players.filter((player) => {
+            if (player.name === name){
+              player.word = word
+            }
+          })
+        } else {
+          this.players.push({name: name, word: word, score: 0})
+        }
       },
 
       compareWordsLength(){
@@ -73,12 +83,12 @@ import {eventBus} from '@/main.js'
         }
       },
 
-      getDefinition(word, index){
+      getDefinition(word, name){
         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
           .then((res) => res.json())
           .then((data) => {
             this.players.filter((player) => {
-              if (index === player.name){
+              if (name === player.name){
                 player.definition = data[0].meanings[0].definitions[0].definition
               }
             })
@@ -91,6 +101,7 @@ import {eventBus} from '@/main.js'
             if (passedPlayer.word.length === 9){
               player.score += 18
             } else {
+              console.log('length', passedPlayer.word.length);
               player.score += passedPlayer.word.length
             }
           }
@@ -130,6 +141,7 @@ import {eventBus} from '@/main.js'
         this.letters = ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd']
         this.timerEnded = false
         this.players = []
+        this.enteredWords = []
       })
     },
     
