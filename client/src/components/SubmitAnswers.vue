@@ -47,9 +47,6 @@ import Results from './Results.vue'
           definitionTwoClicked: false
         }
       },
-      components: {
-        'results': Results
-      },
       methods:{
         submitWords(){
           const words = [
