@@ -18,7 +18,7 @@
               {{ playerTwoMeaning }}
             </p>
             <button class="definition-button" v-if="submitClicked && !definitionTwoClicked && pTwoWord" @click="getWordDefinition('Player Two')">Definition</button>
-            <p v-if="submitClicked && definitionOneClicked && pTwoWord">{{playerTwoMeaning}}</p>
+            <p v-if="submitClicked && definitionTwoClicked && pTwoWord">{{playerTwoMeaning}}</p>
           </div>
         </div>
         <div id="submit-button" >
@@ -64,7 +64,7 @@ import Results from './Results.vue'
           ]
           eventBus.$emit('player-words', words)
           this.submitClicked = true
-          },
+        },
         
         getWordDefinition(playerName){
           for (let player of this.players){
