@@ -33,7 +33,6 @@ import {eventBus} from '@/main.js'
       },
       methods:{
         submitWords(){
-          console.log('submit words');
           const words = [
             {
               name: "Player One", 
@@ -49,7 +48,6 @@ import {eventBus} from '@/main.js'
         },
         resetEverything(){
           this.submitClicked = false
-          console.log('reset');
           this.playerOneWord = ""
           this.playerTwoWord = ""
           eventBus.$emit('reset-everything')

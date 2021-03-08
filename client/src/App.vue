@@ -71,7 +71,6 @@ import {eventBus} from '@/main.js'
       },
 
       compareWordsLength(){
-        // console.log('compare word length');
         if (this.numberOfPlayers === this.players.length){
           let highestPlayers = [{word: ""}]
           for (let player of this.players){
@@ -99,25 +98,21 @@ import {eventBus} from '@/main.js'
       },
 
       calculateScore(passedPlayer){
-        console.log('calculate score');
         if (passedPlayer.length >1){
           console.log('in if');
           for (let player of passedPlayer){
             this.addScores(player)
           }
         } else {
-          console.log('in else');
           this.players.filter((player) => {
-          if (player.name === passedPlayer.name){
-            this.addScores(passedPlayer)
-          }
-        })
+            if (player.name === passedPlayer.name){
+              this.addScores(passedPlayer)
+            }
+          })
         }
-        
       },
 
       addScores(passedPlayer){
-        // console.log('add score');
         if (passedPlayer.word.length === 9){
             passedPlayer.score += 18
           } else {
@@ -126,7 +121,6 @@ import {eventBus} from '@/main.js'
       },
 
       checkEnterWordIsAllowed(word){
-        // console.log('check word is allowed');
         const splitWord = [...word]
         let wordCount = 0
         let board = this.letters.map((letter) => letter.toLowerCase())
@@ -137,9 +131,6 @@ import {eventBus} from '@/main.js'
             if (wordCount === word.length){
               this.currentWord = word
             }
-          } else {
-            //might not be necessary?
-            this.currentWord = ""
           }
         })
       }
@@ -150,7 +141,6 @@ import {eventBus} from '@/main.js'
       eventBus.$on('player-words', (words) => {
         words.forEach((word) => {
           this.checkWord(word.word, word.name)
-          // console.log('bus', word);
         })
       })
 
@@ -159,7 +149,6 @@ import {eventBus} from '@/main.js'
       eventBus.$on('reset-everything', () => {
         this.letters = ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd']
         this.timerEnded = false
-        // this.players = []
         this.enteredWords = []
       })
     },
