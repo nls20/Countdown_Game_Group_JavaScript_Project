@@ -15,36 +15,15 @@ import {eventBus} from '@/main.js'
                 countdownTimer: 3
             }
         },
-        computed: {
-            
-            
-            
-        },
         mounted() {
             let changeTimer = setInterval(() => {
                     this.countdownTimer--
-                    console.log('timer', this.countdownTimer);
                     if (this.countdownTimer<= 0){
                         clearInterval(changeTimer)
                         this.countdownTimer = 'Time Up'
                         eventBus.$emit('timer-finished')
                     }
                 }, 1000)
-                
-                console.log('timer', this.countdownTimer);
-            // let countdownTimerFunction = setInterval(function(){
-            //     if (countdownTimer <10){
-            //         document.getElementById('timer').textContent='00:0'+countdownTimer;
-            //     } else {
-            //         document.getElementById('timer').textContent='00:'+countdownTimer;
-            //     }
-            //     countdownTimer--;
-            //     if (countdownTimer < 0) {
-            //         clearInterval(countdownTimerFunction);
-            //         document.getElementById('timer').textContent = 'Time up'
-            //         eventBus.$emit('timer-finished')
-            //     }
-            // }, 1000);
         }
     }
 </script>

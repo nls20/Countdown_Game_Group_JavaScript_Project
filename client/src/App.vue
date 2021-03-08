@@ -72,14 +72,16 @@ import {eventBus} from '@/main.js'
 
       compareWordsLength(){
         if (this.numberOfPlayers === this.players.length){
-          let longestWordLength = {word: ""}
+          let highestPlayers = [{word: ""}]
           for (let player of this.players){
             let word = player.word
-            if (word.length > longestWordLength.word.length){
-              longestWordLength = player
+            if (word.length > highestPlayers[0].word.length){
+              highestPlayers[0] = player
+            } else if (word.length === highestPlayers[0].word.length){
+              highestPlayers.push(player)
             }
           }
-          this.calculateScore(longestWordLength)
+          this.calculateScore(highestPlayers)
         }
       },
 
@@ -96,16 +98,25 @@ import {eventBus} from '@/main.js'
       },
 
       calculateScore(passedPlayer){
+        if (passedPlayer.length >1){
+          for (let player of passedPlayer){
+            console.log('player', player);
+            this.addScores(player)
+          }
+        }
         this.players.filter((player) => {
           if (player.name === passedPlayer.name){
-            if (passedPlayer.word.length === 9){
-              player.score += 18
-            } else {
-              console.log('length', passedPlayer.word.length);
-              player.score += passedPlayer.word.length
-            }
+            this.addScores(passedPlayer)
           }
         })
+      },
+
+      addScores(passedPlayer){
+        if (passedPlayer.word.length === 9){
+            passedPlayer.score += 18
+          } else {
+            passedPlayer.score += passedPlayer.word.length
+          }
       },
 
       checkEnterWordIsAllowed(word){
