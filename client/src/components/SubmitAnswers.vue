@@ -146,8 +146,9 @@ import Results from './Results.vue'
 }
 
 #player-input-form{
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 
