@@ -56,7 +56,7 @@ import {eventBus} from '@/main.js'
           .catch((err) => {
             console.log('error');
             this.createplayersArray("", index)
-            this.enteredWords.push(word)
+            this.enteredWords.push("")
             this.compareWordsLength()
             console.log(this.enteredWords);
           })
