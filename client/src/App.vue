@@ -47,13 +47,13 @@ import {eventBus} from '@/main.js'
               if (word.length >= 8) {
                 // this.getDefinition(word, index)
               }
-              this.enteredWords.push(word)
+              this.enteredWords.push({name: index, word: word})
               this.compareWordsLength()
             }
           })
           .catch((err) => {
             this.createplayersArray("", index)
-            this.enteredWords.push("")
+            this.enteredWords.push({name: index, word: ""})
             this.compareWordsLength()
           })
       },

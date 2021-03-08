@@ -5,19 +5,20 @@
           <div class="player-input">
             <label for="player_one_input">Player 1 word: </label>
             <input type="text" name="player_one_input" v-model="playerOneWord" required >
-            <p v-if="submitClicked && definitionOneClicked">
-              {{ playerOneMeaning }}
-            </p>
-            <button class="definition-button" v-if="submitClicked && !definitionOneClicked" @click="getWordDefinition('Player One')">Definition</button>
+            <p v-if="submitClicked && !pOneWord">This is not a word</p>
+            <button class="definition-button" v-if="submitClicked && !definitionOneClicked && pOneWord" @click="getWordDefinition('Player One')">Definition</button>
+            <p v-if="submitClicked && definitionOneClicked && pOneWord">{{playerOneMeaning}}</p>
+
           </div>
 
           <div class="player-input">
             <label for="player_two_input">Player 2 word: </label>
             <input type="text" name="player_two_input" v-model="playerTwoWord" required >
-            <p v-if="submitClicked && definitionTwoClicked">
+            <p v-if="submitClicked && !pTwoWord">
               {{ playerTwoMeaning }}
             </p>
-            <button class="definition-button" v-if="submitClicked && !definitionTwoClicked" @click="getWordDefinition('Player Two')">Definition</button>
+            <button class="definition-button" v-if="submitClicked && !definitionTwoClicked && pTwoWord" @click="getWordDefinition('Player Two')">Definition</button>
+            <p v-if="submitClicked && definitionOneClicked && pTwoWord">{{playerTwoMeaning}}</p>
           </div>
         </div>
         <div id="submit-button" >
@@ -30,9 +31,11 @@
 
 <script>
 import {eventBus} from '@/main.js'
+import Results from './Results.vue'
 
     export default {
       props: ['players'],
+            
       data(){
         return{
           playerOneMeaning: "",
@@ -43,6 +46,9 @@ import {eventBus} from '@/main.js'
           definitionOneClicked: false,
           definitionTwoClicked: false
         }
+      },
+      components: {
+        'results': Results
       },
       methods:{
         submitWords(){
@@ -58,11 +64,8 @@ import {eventBus} from '@/main.js'
           ]
           eventBus.$emit('player-words', words)
           this.submitClicked = true
-
-          
-          
-
-        },
+          },
+        
         getWordDefinition(playerName){
           for (let player of this.players){
             if (playerName == player.name && player.word.length > 0){
@@ -75,17 +78,17 @@ import {eventBus} from '@/main.js'
                 } else if (playerName === 'Player Two') {
                   this.playerTwoMeaning = data[0].meanings[0].definitions[0].definition
                   this.definitionTwoClicked = true
-                } else if (player.name === playerName && !player.word) {
-                  if (player.name === 'Player One'){
-                    this.playerOneMeaning = "Not a word"
-                    this.definitionOneClicked = true
-                  }
-                  else if (player.name === 'Player Two') {
-                    this.playerTwoMeaning = "Not a word"
-                    this.definitionTwoClicked = true
-                  }
                 } 
               })
+            } else if (player.name === playerName && !player.word) {
+              if (player.name === 'Player One'){
+                this.playerOneMeaning = "Not a word"
+                this.definitionOneClicked = true
+              }
+              else if (player.name === 'Player Two') {
+                this.playerTwoMeaning = "Not a word"
+                this.definitionTwoClicked = true
+              }
             }       
           }
         },
@@ -100,23 +103,27 @@ import {eventBus} from '@/main.js'
           eventBus.$emit('reset-everything')
         }
       },
-      // computed:{
-      //   getWordDefinition: function (){ 
-      //     let playerName = 'Player One'
-      //     for (let player of this.players){
-      //       console.log('name', player.name);
-      //       if (playerName == player.name && player.word.length > 0){
-      //         console.log('in if');
-      //         fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${player.word}`)
-      //         .then((res) => res.json())
-      //         .then((data) => {
-      //           console.log('data', data);
-      //           this.playerOneMeaning = data[0].meanings[0].definitions[0].definition
-      //         })
-      //       }
-      //     }
-      //   }        
-      // }
+      computed:{
+        pOneWord: function(){
+          let wordToReturn = "empty"
+          this.players.filter((player) => {
+            if (player.name === 'Player One'){
+              wordToReturn = player.word
+            }
+          })
+          return wordToReturn
+        },
+        pTwoWord: function(){
+          let wordToReturn = "empty"
+          this.players.filter((player) => {
+            if (player.name === 'Player Two'){
+              wordToReturn = player.word
+            }
+          })
+          return wordToReturn
+        }
+
+      },
     }
 </script>
 
