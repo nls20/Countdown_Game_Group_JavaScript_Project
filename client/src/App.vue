@@ -4,8 +4,6 @@
     <timer v-if="letters.length === 9" />
     <letters-board :letters="letters"/>
     <letter-input v-if="letters.length < 9" />
-    <!-- <letters-board :letters="letters"/>
-    <letter-input/> -->
     <submit-answers :players="players"/>
   </section>
 </template>
@@ -44,9 +42,6 @@ import {eventBus} from '@/main.js'
               this.currentWord = ""
               this.createplayersArray(word, index)
 
-              if (word.length >= 8) {
-                // this.getDefinition(word, index)
-              }
               this.enteredWords.push({name: index, word: word})
               this.compareWordsLength()
             }
@@ -84,7 +79,6 @@ import {eventBus} from '@/main.js'
           this.calculateScore(highestPlayers)
         }
       },
-
       
       calculateScore(passedPlayer){
         if (passedPlayer.length >1){
