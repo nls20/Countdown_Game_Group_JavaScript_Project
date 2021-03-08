@@ -6,7 +6,7 @@
     <letter-input v-if="letters.length < 9" />
     <!-- <letters-board :letters="letters"/>
     <letter-input/> -->
-    <submit-answers />
+    <submit-answers :players="players"/>
   </section>
 </template>
 
@@ -45,7 +45,7 @@ import {eventBus} from '@/main.js'
               this.createplayersArray(word, index)
 
               if (word.length >= 8) {
-                this.getDefinition(word, index)
+                // this.getDefinition(word, index)
               }
               this.enteredWords.push(word)
               this.compareWordsLength()
@@ -85,18 +85,7 @@ import {eventBus} from '@/main.js'
         }
       },
 
-      getDefinition(word, name){
-        fetch(`https://api.dictionaryapi.dev/api/v2/entries/en_US/${word}`)
-          .then((res) => res.json())
-          .then((data) => {
-            this.players.filter((player) => {
-              if (name === player.name){
-                player.definition = data[0].meanings[0].definitions[0].definition
-              }
-            })
-          })
-      },
-
+      
       calculateScore(passedPlayer){
         if (passedPlayer.length >1){
           for (let player of passedPlayer){
