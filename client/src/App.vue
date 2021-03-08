@@ -38,12 +38,12 @@ import {eventBus} from '@/main.js'
           .then((res) => res.json())
           .then((data) => {
             if (word === data[0].word){
+              console.log('check word if', word);
               this.checkEnterWordIsAllowed(word)
               //improve this, is there a way to make the output of a function equal to a variable?
               word = this.currentWord
               this.currentWord = ""
               this.createplayersArray(word, index)
-              console.log('word', word);
 
               if (word.length >= 8) {
                 this.getDefinition(word, index)
@@ -71,6 +71,7 @@ import {eventBus} from '@/main.js'
       },
 
       compareWordsLength(){
+        // console.log('compare word length');
         if (this.numberOfPlayers === this.players.length){
           let highestPlayers = [{word: ""}]
           for (let player of this.players){
@@ -98,20 +99,25 @@ import {eventBus} from '@/main.js'
       },
 
       calculateScore(passedPlayer){
+        console.log('calculate score');
         if (passedPlayer.length >1){
+          console.log('in if');
           for (let player of passedPlayer){
-            console.log('player', player);
             this.addScores(player)
           }
-        }
-        this.players.filter((player) => {
+        } else {
+          console.log('in else');
+          this.players.filter((player) => {
           if (player.name === passedPlayer.name){
             this.addScores(passedPlayer)
           }
         })
+        }
+        
       },
 
       addScores(passedPlayer){
+        // console.log('add score');
         if (passedPlayer.word.length === 9){
             passedPlayer.score += 18
           } else {
@@ -120,6 +126,7 @@ import {eventBus} from '@/main.js'
       },
 
       checkEnterWordIsAllowed(word){
+        // console.log('check word is allowed');
         const splitWord = [...word]
         let wordCount = 0
         let board = this.letters.map((letter) => letter.toLowerCase())
@@ -143,6 +150,7 @@ import {eventBus} from '@/main.js'
       eventBus.$on('player-words', (words) => {
         words.forEach((word) => {
           this.checkWord(word.word, word.name)
+          // console.log('bus', word);
         })
       })
 
@@ -151,7 +159,7 @@ import {eventBus} from '@/main.js'
       eventBus.$on('reset-everything', () => {
         this.letters = ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd']
         this.timerEnded = false
-        this.players = []
+        // this.players = []
         this.enteredWords = []
       })
     },

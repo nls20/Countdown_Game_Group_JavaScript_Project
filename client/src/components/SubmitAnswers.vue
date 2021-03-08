@@ -4,16 +4,16 @@
         <div id="player-input-form">
           <div class="player-input">
             <label for="player_one_input">Player 1 word: </label>
-            <input type="text" name="player_one_input" v-model="playerOneWord" >
+            <input type="text" name="player_one_input" v-model="playerOneWord" required >
           </div>
 
           <div class="player-input">
             <label for="player_two_input">Player 2 word: </label>
-            <input type="text" name="player_two_input" v-model="playerTwoWord" >
+            <input type="text" name="player_two_input" v-model="playerTwoWord" required >
           </div>
         </div>
         <div id="submit-button" >
-          <input type="submit" value="Submit words">
+          <input v-if="!submitClicked" type="submit" value="Submit words">
           <button v-if="submitClicked" @click="resetEverything">Reset</button>
         </div>
       </form>
@@ -33,6 +33,7 @@ import {eventBus} from '@/main.js'
       },
       methods:{
         submitWords(){
+          console.log('submit words');
           const words = [
             {
               name: "Player One", 
@@ -47,6 +48,8 @@ import {eventBus} from '@/main.js'
           this.submitClicked = true
         },
         resetEverything(){
+          this.submitClicked = false
+          console.log('reset');
           this.playerOneWord = ""
           this.playerTwoWord = ""
           eventBus.$emit('reset-everything')
