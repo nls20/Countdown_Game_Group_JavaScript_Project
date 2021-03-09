@@ -4,6 +4,7 @@
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
         <submit-answers />
+        <check-answers :numbers="playingNumbers" />
     </section>
 </template>
 
@@ -12,6 +13,7 @@ import Timer from '@/components/Reusable/Timer.vue'
 import ChooseNumbers from '@/components/Numbers/ChooseNumbers.vue'
 import NumbersBoard from '@/components/Numbers/NumbersBoard.vue'
 import SubmitAnswers from '@/components/Numbers/SubmitAnswers.vue'
+import CheckAnswers from '@/components/Numbers/CheckAnswers.vue'
 
 import {eventBus} from '@/main.js'
     export default {
@@ -86,7 +88,8 @@ import {eventBus} from '@/main.js'
             'timer': Timer,
             'choose-numbers': ChooseNumbers,
             'numbers-board': NumbersBoard,
-            'submit-answers': SubmitAnswers
+            'submit-answers': SubmitAnswers,
+            'check-answers': CheckAnswers
         }
     }
 </script>
