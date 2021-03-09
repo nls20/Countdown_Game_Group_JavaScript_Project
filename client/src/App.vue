@@ -1,8 +1,12 @@
 <template >
   <section >
-    <letter-round v-if="roundNumber === 1" />
-    <conundrum v-if="roundNumber === 2" />
-    <number-round v-if="roundNumber === 3" />
+    <button v-if="gameNumber === 0" @click="gameSelect('Letters')">Letters</button>
+    <button v-if="gameNumber === 0" @click="gameSelect('Numbers')">Numbers</button>
+    <button v-if="gameNumber === 0" @click="gameSelect('Conundrum')">Conundrum</button>
+    <button v-if="gameNumber === 0" @click="gameSelect('Full Game')">Full Game</button>
+    <letter-round v-if="gameNumber === 'Letters'" />
+    <conundrum v-if="gameNumber === 'Conundrum'" />
+    <number-round v-if="gameNumber === 'Numbers'" />
   </section>
 </template>
 
@@ -13,13 +17,21 @@ import NumbersRound from '@/components/NumbersRound.vue'
   export default {
     data(){
       return {
-        roundNumber: 3
+        gameNumber: 0
       }
     },
     components:{
       'letter-round': LetterRound,
       'conundrum': ConundrumRound,
       'number-round': NumbersRound
+    },
+    methods:{
+      gameSelect(gameNumber){
+        this.gameNumber = gameNumber
+        if (gameNumber === 'Full Game'){
+          this.gameNumber = 'Letters'
+        }
+      }
     }
   }
 
