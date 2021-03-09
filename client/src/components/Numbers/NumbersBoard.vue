@@ -1,5 +1,6 @@
 <template>
-    <section >        
+    <section >  
+        <h3>{{targetNumber}}</h3>      
         <div id="number-grid">
             <p id="first-number">{{numbers[0]}}</p>
             <p id="second-number">{{numbers[1]}}</p>
@@ -15,7 +16,7 @@
 <script>
     export default {
         name: 'number-board',
-        props: ['numbers'],
+        props: ['numbers', 'targetNumber'],
         data(){
             return {
 

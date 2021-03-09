@@ -2,7 +2,7 @@
     <section>
         <timer />
         <choose-numbers />
-        <!-- <numbers-board /> -->
+        <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
 
     </section>
 </template>
@@ -18,10 +18,17 @@ import {eventBus} from '@/main.js'
             return {
                 largeNumbers: [25, 50, 75, 100],
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
-                targetNumbers: [],
+                playingNumbers: [],
+                targetNumber: 0
                 
             }
         },
+        methods:{
+            resetEverything(){
+                this.playerNumbers = []
+                this.targetNumb
+            }
+        }
 
         mounted(){
             eventBus.$on('large-numbers', (number) => {
@@ -29,14 +36,15 @@ import {eventBus} from '@/main.js'
                 let tempSmallNumbers = [...this.smallNumbers]
                 for (let i=0; i<number; i++){
                     let random = Math.floor(Math.random() * Math.floor(tempLargeNumbers.length))
-                    this.targetNumbers.push(tempLargeNumbers[random])
+                    this.playingNumbers.push(tempLargeNumbers[random])
                     tempLargeNumbers.splice(random, 1)
                 }
-                for (let i=this.targetNumbers.length ; i<6; i++ ){
+                for (let i=this.playingNumbers.length ; i<6; i++ ){
                     let random = Math.floor(Math.random() * Math.floor(tempSmallNumbers.length))
-                    this.targetNumbers.push(tempSmallNumbers[random])
+                    this.playingNumbers.push(tempSmallNumbers[random])
                     tempSmallNumbers.splice(random, 1)
                 }
+                this.targetNumber = Math.floor(Math.random() * Math.floor(898))+101
             })
         },
         
