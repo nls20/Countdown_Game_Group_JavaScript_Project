@@ -3,7 +3,7 @@
         <timer />
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
-
+        <submit-answers />
     </section>
 </template>
 
@@ -11,6 +11,7 @@
 import Timer from '@/components/Reusable/Timer.vue'
 import ChooseNumbers from '@/components/Numbers/ChooseNumbers.vue'
 import NumbersBoard from '@/components/Numbers/NumbersBoard.vue'
+import SubmitAnswers from '@/components/Numbers/SubmitAnswers.vue'
 
 import {eventBus} from '@/main.js'
     export default {
@@ -26,9 +27,9 @@ import {eventBus} from '@/main.js'
         methods:{
             resetEverything(){
                 this.playerNumbers = []
-                this.targetNumb
+                this.targetNumber = 0
             }
-        }
+        },
 
         mounted(){
             eventBus.$on('large-numbers', (number) => {
@@ -51,7 +52,8 @@ import {eventBus} from '@/main.js'
         components:{
             'timer': Timer,
             'choose-numbers': ChooseNumbers,
-            'numbers-board': NumbersBoard
+            'numbers-board': NumbersBoard,
+            'submit-answers': SubmitAnswers
         }
     }
 </script>
