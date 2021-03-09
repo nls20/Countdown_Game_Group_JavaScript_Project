@@ -32,13 +32,13 @@ section{
     justify-content: center;
 }
 h
-#letter-grid{
+#number-grid{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-#letter-grid> p{
+#number-grid> p{
     display: grid;
     margin: 4px;
     background-color: blue;
@@ -51,7 +51,7 @@ h
     align-items: center;
 }
 
-#letter-grid {
+#number-grid {
     background-color: white;
     border: solid darkblue 2px;
     border-width: 4px;

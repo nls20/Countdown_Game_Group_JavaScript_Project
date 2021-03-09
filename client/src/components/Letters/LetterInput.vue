@@ -52,7 +52,6 @@ button {
     margin: 20px 40px;
     width: 180px;
     height: 100px
-
 }
 
 
