@@ -29,8 +29,11 @@ export default {
         submitWords(){
             let conundrumWord={}
             if (this.playerOneWord.length === 9){
+                
                 conundrumWord = {name: "Player One", word: this.playerOneWord}
+                console.log('player 1', conundrumWord);
             } else if (this.playerTwoWord.length === 9){
+                console.log('player 2');
                 conundrumWord = {name: "Player Two", word: this.playerTwoWord}
             }
             eventBus.$emit('conundrum-answered', conundrumWord)

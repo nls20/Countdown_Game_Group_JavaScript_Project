@@ -3,7 +3,7 @@
         <section id="background">
             <h1>CONUNDRUM</h1>
             <timer />
-            <letters-board :letters="splitWord(word)"/>
+            <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
             <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer"/>
         </section>
@@ -16,29 +16,42 @@ import LetterBoard from '@/components/Reusable/LetterBoard.vue'
 import ConundrumSubmit from '@/components/Conundrum/ConundrumSubmit.vue'
 import Timer from '@/components/Reusable/Timer.vue'
 import CorrectAnswer from '@/components/Conundrum/CorrectAnswer.vue'
+import CountdownService from '@/services/CountdownService'
 
 import {eventBus} from '@/main.js'
 
 export default {
     data(){
         return {
-            word: 'fireboard',
+            word: '',
+            jumbledWord: "",
             correctPlayer: ""
         }
     },
 
     methods:{
-        splitWord: function(word){
-            return [...word.toUpperCase()]
+        getConundrumWord(){
+            CountdownService.getConundrumWords()
+            .then(words => {
+                let conundrum = words[Math.floor(Math.random()*words.length)].name.toUpperCase()
+                this.word = conundrum
+                this.jumbledWord = [...conundrum].sort()
+
+            })
         }
     },
 
     mounted(){
         eventBus.$on('conundrum-answered', (conundrum) => {
-            if (conundrum.word === this.word){
+            console.log('con', conundrum);
+            console.log('word', this.word);
+            if (conundrum.word.toUpperCase() == this.word){
+                console.log('word', conundrum.word.toUpperCase());
                 this.correctPlayer = conundrum.name
             }
         })
+
+        this.getConundrumWord()
     },
     computed:{
         
