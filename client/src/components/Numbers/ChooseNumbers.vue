@@ -1,12 +1,12 @@
 <template>
     <div>
         <h3>Choose number of large numbers</h3>
-        <div>
-            <button @click="setLargeNumber(0)">0</button>
-            <button @click="setLargeNumber(1)">1</button>
-            <button @click="setLargeNumber(2)">2</button>
-            <button @click="setLargeNumber(3)">3</button>
-            <button @click="setLargeNumber(4)">4</button>
+        <div id="choose-numbers">
+            <button class="large-button" @click="setLargeNumber(0)">0</button>
+            <button class="large-button" @click="setLargeNumber(1)">1</button>
+            <button class="large-button" @click="setLargeNumber(2)">2</button>
+            <button class="large-button" @click="setLargeNumber(3)">3</button>
+            <button class="large-button" @click="setLargeNumber(4)">4</button>
         </div>
     </div>
 </template>
@@ -29,7 +29,12 @@ import {eventBus} from '@/main.js'
 
 <style lang="css" scoped>
 
-button {
+#choose-numbers{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.large-button {
     box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
 	background-color:#3d94f6;
@@ -44,9 +49,9 @@ button {
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
-    margin: 20px 40px;
-    width: 180px;
-    height: 100px
+    margin: 5px 10px;
+    width: 70px;
+    height: 40px
 }
 
 </style>
