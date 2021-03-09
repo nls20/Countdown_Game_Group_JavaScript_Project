@@ -32,6 +32,7 @@ import {eventBus} from '@/main.js'
 #choose-numbers{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .large-button {
