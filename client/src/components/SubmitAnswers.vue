@@ -31,7 +31,6 @@
 
 <script>
 import {eventBus} from '@/main.js'
-import Results from './Results.vue'
 
     export default {
       props: ['players'],
