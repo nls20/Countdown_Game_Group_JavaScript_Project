@@ -12,7 +12,7 @@
 
 <script>
 import Timer from '@/components/Letters/Timer.vue'
-import LetterBoard from '@/components/Letters/LetterBoard.vue'
+import LetterBoard from '@/components/Reusable/LetterBoard.vue'
 import LetterInput from '@/components/Letters/LetterInput.vue'
 import SubmitAnswers from '@/components/Letters/SubmitAnswers.vue'
 

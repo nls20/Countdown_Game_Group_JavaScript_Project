@@ -1,15 +1,23 @@
 <template >
   <section >
-    <letter-round />
+    <letter-round v-if="roundNumber === 1" />
+    <conundrum v-if="roundNumber === 2" />
   </section>
 </template>
 
 <script>
 import LetterRound from '@/components/LettersRound.vue'
+import ConundrumRound from '@/components/ConundrumRound.vue'
 
   export default {
+    data(){
+      return {
+        roundNumber: 2
+      }
+    },
     components:{
-      'letter-round': LetterRound
+      'letter-round': LetterRound,
+      'conundrum': ConundrumRound
     }
   }
 
