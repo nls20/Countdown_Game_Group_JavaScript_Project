@@ -20,14 +20,32 @@ import {eventBus} from '@/main.js'
                 largeNumbers: [25, 50, 75, 100],
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
                 playingNumbers: [],
-                targetNumber: 0
-                
+                targetNumber: 0,
+                players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}]
             }
         },
         methods:{
             resetEverything(){
                 this.playerNumbers = []
                 this.targetNumber = 0
+            },
+            declareWinner(playerName, pointsDifference){
+                if (pointsDifference === 0){
+                    this.addPoints(playerName, 10)
+                } else if (pointsDifference < 10 && pointsDifference > 5){
+                    this.addPoints(playerName, 7)
+                } else if (pointsDifference < 10){
+                    this.addPoints(playerName, 5)
+                } 
+            },
+            addPoints(playerName, points){
+                this.players.filter((player) => {
+                    if (player.name === playerName){
+                        player.score += points
+                    } else if (playerName == 'Draw'){
+                        player.score += points
+                    }
+                })
             }
         },
 
@@ -53,6 +71,14 @@ import {eventBus} from '@/main.js'
                 let playerTwoDifference = this.targetNumber - players[1].score
                 if (playerOneDifference < 0) playerOneDifference *= -1
                 if (playerTwoDifference < 0) playerTwoDifference *= -1
+                
+                if (playerOneDifference > playerTwoDifference){
+                    this.declareWinner('Player Two',playerTwoDifference)
+                } else if (playerTwoDifference > playerOneDifference){
+                    this.declareWinner('Player One', playerOneDifference)
+                } else {
+                    this.declareWinner('Draw', playerOneDifference)
+                }
             })
         },
         
