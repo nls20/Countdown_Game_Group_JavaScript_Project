@@ -1,6 +1,6 @@
 <template>
     <section >  
-        <h3>{{targetNumber}}</h3>      
+        <h2 id="target-number">{{targetNumber}}</h2>      
         <div id="number-grid">
             <p id="first-number">{{numbers[0]}}</p>
             <p id="second-number">{{numbers[1]}}</p>
@@ -28,10 +28,14 @@
 <style lang="css" scoped>
 
 section{
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
 }
-h
+
+#target-number{
+    text-align: center;
+}
+
 #number-grid{
     display: flex;
     flex-wrap: wrap;

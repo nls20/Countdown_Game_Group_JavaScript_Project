@@ -1,16 +1,26 @@
 <template>
     <div>
-        <button @click="numberOne" >{{numbers[0]}}</button>
-        <button @click="numberTwo" >{{numbers[1]}}</button>
-        <button @click="numberThree" >{{numbers[2]}}</button>
-        <button @click="numberFour" >{{numbers[3]}}</button>
-        <button @click="numberFive" >{{numbers[4]}}</button>
-        <button @click="numberSix" >{{numbers[5]}}</button>
-        <button @click="add" >+</button>
-        <button @click="minus" >-</button>
-        <button @click="times" >X</button>
-        <button @click="divide" >/</button>
-        <button @click="equals" >Submit Answer</button>
+        <div>
+            <div>
+                <button class="answer-button" @click="numberOne" >{{numbers[0]}}</button>
+                <button class="answer-button" @click="numberTwo" >{{numbers[1]}}</button>
+                <button class="answer-button" @click="numberThree" >{{numbers[2]}}</button>
+                <button class="answer-button" @click="numberFour" >{{numbers[3]}}</button>
+                <button class="answer-button" @click="numberFive" >{{numbers[4]}}</button>
+                <button class="answer-button" @click="numberSix" >{{numbers[5]}}</button>
+            </div>
+
+            <div>
+                <button class="operator-button" @click="add" >+</button>
+                <button class="operator-button" @click="minus" >-</button>
+                <button class="operator-button" @click="times" >X</button>
+                <button class="operator-button" @click="divide" >/</button>
+            </div>
+            
+            
+        </div>
+        
+        <button class="submit-button" @click="equals" >Submit Answer</button>
 
     </div>
 </template>
@@ -119,7 +129,7 @@
 
 <style lang="css" scoped>
 
-button {
+.submit-answer {
     box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
 	background-color:#3d94f6;
@@ -137,6 +147,46 @@ button {
     margin: 20px 40px;
     width: 180px;
     height: 100px
+}
+
+.answer-button {
+    box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+	background-color:#3d94f6;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:large;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+    margin: 5px 10px;
+    width: 70px;
+    height: 40px
+}
+
+.operator-button {
+    box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:linear-gradient(to bottom, #5f6ae3 5%, #1c138a 100%);
+	background-color:#b5f63d;
+	border-radius:6px;
+	border:1px solid #337fed;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:large;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #1570cd;
+    margin: 5px 10px;
+    width: 70px;
+    height: 40px
 }
 
 </style>
