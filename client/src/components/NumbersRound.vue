@@ -47,6 +47,13 @@ import {eventBus} from '@/main.js'
                 }
                 this.targetNumber = Math.floor(Math.random() * Math.floor(898))+101
             })
+
+            eventBus.$on('numbers-answers', (players) => {
+                let playerOneDifference = this.targetNumber - players[0].score
+                let playerTwoDifference = this.targetNumber - players[1].score
+                if (playerOneDifference < 0) playerOneDifference *= -1
+                if (playerTwoDifference < 0) playerTwoDifference *= -1
+            })
         },
         
         components:{

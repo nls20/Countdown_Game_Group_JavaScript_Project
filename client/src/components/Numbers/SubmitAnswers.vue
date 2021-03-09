@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import {eventBus} from '@/main.js'
     export default {
         data(){
             return {
@@ -22,7 +23,11 @@
         },
         methods:{
             submitNumbers(){
-
+                let numbers = [
+                    {name: 'Player One', score: this.playerOneNumber},
+                    {name: 'Player Two', score: this.playerTwoNumber}
+                ]
+                eventBus.$emit('numbers-answers', numbers)
             }
         }
         
