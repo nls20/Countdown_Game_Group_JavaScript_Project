@@ -17,12 +17,11 @@ import {eventBus} from '@/main.js'
     export default {
         data(){
             return {
-                largeNumbers: -1
             }
         },
         methods:{
             setLargeNumber(largeNumber){
-                this.largeNumbers = largeNumber
+                eventBus.$emit('large-numbers', largeNumber)
             }
         }
     }
