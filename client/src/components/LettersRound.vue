@@ -152,11 +152,7 @@ import {eventBus} from '@/main.js'
 <style lang="css" scoped>
 
 #background{
-  background-image: url('https://www.clickz.com/wp-content/uploads/2017/01/maxresdefault.jpg');
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  
 }
 
 section{
