@@ -17,7 +17,7 @@ import {GChart} from 'vue-google-charts'
                 let newTime = [...this.times]
                 newTime[1][1] += 0.1
                 
-                if (newTime[1][1] === 31){
+                if (newTime[1][1] > 30){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-finished')
                 } else {
