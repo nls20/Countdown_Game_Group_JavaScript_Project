@@ -60,7 +60,6 @@ import {eventBus} from '@/main.js'
 * {
   font-family: sans-serif;
   background-color: #ADD8E6;
-  background-size: auto;
 }
 
 button {
@@ -94,9 +93,12 @@ button:active {
 }
 
 header {
-  font-size: 80px;
+  font-size: 100px;
   text-align: center;
   padding: 30px;
+  color: #004e98;
+  font-weight: 700;
+  text-shadow: 0 0 3px white;
 }
 
 section {

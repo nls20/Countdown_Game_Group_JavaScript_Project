@@ -1,6 +1,8 @@
 <template>
-    <section>  
-        <h2 id="target-number">{{targetNumber}}</h2>
+    <section> 
+        <div> 
+            <h2 id="target-number">{{targetNumber}}</h2>
+        </div>
         <div>     
             <div id="number-grid">
                 <p id="first-number">{{numbers[0]}}</p>
@@ -40,7 +42,15 @@ section > div {
 }
 
 #target-number{
+    display: grid;
     text-align: center;
+    color: greenyellow;
+    background-color: black;
+    width: 90px;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    border: gray solid 4px;
 }
 
 

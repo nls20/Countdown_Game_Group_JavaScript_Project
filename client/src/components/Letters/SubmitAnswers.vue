@@ -155,7 +155,7 @@ import {eventBus} from '@/main.js'
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px;
+  padding: 60px;
 }
 
 
@@ -203,6 +203,15 @@ import {eventBus} from '@/main.js'
   height: 100px
 }
 
+#submit-button>button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+#submit-button>button:active {
+	position:relative;
+	top:1px;
+}
+
 .definition-button {
   box-shadow:inset 0px 1px 0px 0px #78f098;
 	background:linear-gradient(to bottom, #69e356 5%, #4acc5d 100%);
@@ -220,6 +229,8 @@ import {eventBus} from '@/main.js'
 	text-shadow:0px 1px 0px #74a822;
   margin: 20px 50px;
 }
+
+
 
 .definition {
   max-width: 275px;

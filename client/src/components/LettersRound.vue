@@ -168,15 +168,15 @@ import {eventBus} from '@/main.js'
 <style lang="css" scoped>
 
 section{
-  margin: -10px;
-  padding: 10px;
+  /* margin: -10px;
+  padding: 10px; */
   
 }
 
 h2 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0px;
 }
 
 </style>

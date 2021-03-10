@@ -1,6 +1,6 @@
 <template>
     <section >
-        <google-chart id="pie-chart" type="PieChart" :options="{legend: 'none', responsive: true, backgroundColor: '#ADD8E6', pieSliceText: 'none', slices:{0: {color: 'white'}, 1: {color: '#D3D3D3'}, 2:{color: 'blue'}}}" :data="times" />
+        <google-chart id="pie-chart" type="PieChart" :options="{legend: 'none', responsive: true, backgroundColor: '#ADD8E6', pieSliceText: 'none', slices:{0: {color: 'white'}, 1: {color: '#3d94f6'}, 2:{color: 'blue'}}}" :data="times" />
 
   </section>
 </template>
@@ -34,18 +34,23 @@ import {GChart} from 'vue-google-charts'
 
 <style lang="css" scoped>
 
-h2 {
+/* h2 {
   font-size: 30px;
   text-align: center;
   border-width: 2px;
   border: solid darkblue 2px;
   width: 200px;
   background-color: white;
-}
+} */
 
 section {
     display: grid;
     justify-content: center;
+}
+
+#pie-chart {
+    width: 400px;
+    height: 400px;
 }
 
 </style>

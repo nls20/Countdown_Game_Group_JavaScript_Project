@@ -44,12 +44,12 @@ section{
 #letter-grid> p{
     display: grid;
     margin: 4px;
-    background-color: blue;
+    background-color: #004e98;
     color: white;
     padding:8px;
     width: 75px;
     height: 75px;
-    font-size: xx-large;
+    font-size: 40px;
     justify-content: center;
     align-items: center;
 }
