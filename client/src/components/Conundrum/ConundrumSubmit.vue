@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <button @click="stopTimer" id="stop-button">Stop Timer</button>
-    <button @click="startTimer" id="stop-button">Start Timer</button> -->
+    <!-- <button @click="stopTimer" id="stop-button">Stop Timer</button> -->
+    <!-- <button @click="startTimer" id="stop-button">Start Timer</button> -->
     <form @submit.prevent="submitWords">
       <div id="player-input-form">
         <div class="player-input">
@@ -15,7 +15,7 @@
         </div>
       </div>
 
-            <input id="submit-button" type="submit" value="Submit Answer">
+      <input id="submit-button" type="submit" value="Submit Answer">
     </form>
   </div>
 </template>
@@ -25,6 +25,7 @@ import {eventBus} from '@/main.js'
 
 export default {
 
+    props:['fullGame'],
     data(){
         return {
             playerOneWord: "",
