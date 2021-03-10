@@ -1,5 +1,6 @@
 <template>
     <section>
+        <h2>NUMBERS ROUND</h2>
         <timer :times="currentTime"/>
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
@@ -98,5 +99,11 @@ import {eventBus} from '@/main.js'
 </script>
 
 <style lang="css" scoped>
+
+h2 {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 50px;
+}
 
 </style>

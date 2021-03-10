@@ -131,12 +131,14 @@ import {eventBus} from '@/main.js'
   display: grid;
   justify-content: center;
   margin: 0px 30px;
+  font-size: 25px;
 }
 
 .player-input>label{
   text-align: center;
   margin-bottom: 5px;
 }
+
 
 .player-input>input{
   font-size: x-large
@@ -146,6 +148,7 @@ import {eventBus} from '@/main.js'
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 30px;
 }
 
 

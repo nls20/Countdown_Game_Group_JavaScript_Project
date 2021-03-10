@@ -47,8 +47,8 @@ section{
     background-color: blue;
     color: white;
     padding:8px;
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     font-size: xx-large;
     justify-content: center;
     align-items: center;
@@ -58,7 +58,7 @@ section{
     background-color: white;
     border: solid darkblue 2px;
     border-width: 4px;
-    width: 668px;
+    width: 895px;
 }
 
 </style>

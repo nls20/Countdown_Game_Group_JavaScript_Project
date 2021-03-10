@@ -1,7 +1,7 @@
 <template>
   <div>
         <section id="background">
-            <h1>CONUNDRUM</h1>
+            <h2>CONUNDRUM ROUND</h2>
             <timer :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
@@ -90,6 +90,12 @@ button {
     margin: 20px 40px;
     width: 180px;
     height: 100px
+}
+
+h2 {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 </style>

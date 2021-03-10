@@ -1,7 +1,7 @@
 <template>
     <div>
         <section id="background">
-            <h1>COUNTDOWN</h1>
+            <h2>LETTERS ROUND</h2>
             <timer v-if="letters.length === 9" :times="currentTime"/>
             <letters-board :letters="letters"/>
             <letter-input v-if="letters.length < 9" />
@@ -155,21 +155,16 @@ import {eventBus} from '@/main.js'
 
 <style lang="css" scoped>
 
-#background{
-  
-}
-
 section{
-  
   margin: -10px;
   padding: 10px;
   
 }
 
-h1 {
+h2 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: 150px;
+  margin-bottom: 50px;
 }
 
 </style>

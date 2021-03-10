@@ -1,13 +1,16 @@
 <template >
-  <section >
-    <button v-if="gameNumber === 0" @click="gameSelect('Letters')">Letters</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Numbers')">Numbers</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Conundrum')">Conundrum</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Full Game')">Full Game</button>
-    <letter-round v-if="gameNumber === 'Letters'" />
-    <conundrum v-if="gameNumber === 'Conundrum'" />
-    <number-round v-if="gameNumber === 'Numbers'" />
-  </section>
+  <div>
+    <header>COUNTDOWN</header>
+    <section >
+      <button v-if="gameNumber === 0" @click="gameSelect('Letters')">Letters</button>
+      <button v-if="gameNumber === 0" @click="gameSelect('Numbers')">Numbers</button>
+      <button v-if="gameNumber === 0" @click="gameSelect('Conundrum')">Conundrum</button>
+      <button v-if="gameNumber === 0" @click="gameSelect('Full Game')">Full Game</button>
+      <letter-round v-if="gameNumber === 'Letters'" />
+      <conundrum v-if="gameNumber === 'Conundrum'" />
+      <number-round v-if="gameNumber === 'Numbers'" />
+    </section>
+  </div>
 </template>
 
 <script>
@@ -45,6 +48,7 @@ import NumbersRound from '@/components/NumbersRound.vue'
 
 * {
   font-family: sans-serif;
+  background-color: #ADD8E6;
 }
 
 button {
@@ -67,5 +71,26 @@ button {
   height: 100px
 
 }
+
+button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+header {
+  font-size: 80px;
+  text-align: center;
+  padding: 30px;
+}
+
+section {
+  text-align: center;
+}
+
+
 
 </style>

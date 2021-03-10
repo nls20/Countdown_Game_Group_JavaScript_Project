@@ -4,7 +4,7 @@
         <h2 v-if="countdownTimer>=10" id="timer">00:{{countdownTimer}}</h2>
         <h2 v-if="countdownTimer === 'Time Up'" id="timer">Time Up</h2> -->
 
-        <google-chart id="pie-chart" type="PieChart" :options="{legend: 'none', responsive: true, backgroundColor: '#ADD8E6', pieSliceText: 'none', slices:{0: {color: 'white'}, 1: {color: '#D3D3D3'}, 2:{color: '#D3D3D3'}}}" :data="times" />
+        <google-chart id="pie-chart" type="PieChart" :options="{legend: 'none', responsive: true, backgroundColor: '#ADD8E6', pieSliceText: 'none', slices:{0: {color: 'white'}, 1: {color: '#D3D3D3'}, 2:{color: 'blue'}}}" :data="times" />
 
   </section>
 </template>
