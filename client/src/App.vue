@@ -8,8 +8,8 @@
       <button v-if="game === 0" @click="gameSelect('Full Game')">Full Game</button>
       <h1 v-if="fullGame">Round {{currentRoundNumber}}</h1>
       <letter-round v-if="game === 'Letters'" :players="players" :fullGame="fullGame" />
-      <conundrum v-if="game === 'Conundrum'" :fullGame="fullGame"/>
-      <number-round v-if="game === 'Numbers'" :fullGame="fullGame"/>
+      <conundrum v-if="game === 'Conundrum'" :players="players" :fullGame="fullGame"/>
+      <number-round v-if="game === 'Numbers'" :players="players" :fullGame="fullGame"/>
     </section>
   </div>  
 </template>

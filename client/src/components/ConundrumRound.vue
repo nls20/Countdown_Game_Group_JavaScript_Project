@@ -25,7 +25,7 @@ import CountdownService from '@/services/CountdownService'
 import {eventBus} from '@/main.js'
 
 export default {
-    props: ['fullGame'],
+    props: ['fullGame', 'players'],
     data(){
         return {
             word: '',
@@ -115,7 +115,16 @@ button {
 h2 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+#scores{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 </style>

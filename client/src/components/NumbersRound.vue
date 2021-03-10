@@ -22,7 +22,7 @@ import CheckAnswers from '@/components/Numbers/CheckAnswers.vue'
 
 import {eventBus} from '@/main.js'
     export default {
-        props: ['fullGame'],
+        props: ['fullGame', 'players'],
         data(){
             return {
                 largeNumbers: [25, 50, 75, 100],
@@ -125,6 +125,15 @@ h2 {
   font-size: 40px;
   text-align: center;
   margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+#scores{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 </style>
