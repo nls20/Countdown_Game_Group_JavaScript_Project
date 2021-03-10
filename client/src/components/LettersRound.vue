@@ -2,7 +2,7 @@
     <div>
         <section id="background">
             <h1>COUNTDOWN</h1>
-            <timer v-if="letters.length === 9" />
+            <timer v-if="letters.length === 9" :times="currentTime"/>
             <letters-board :letters="letters"/>
             <letter-input v-if="letters.length < 9" />
             <submit-answers :players="players"/>
@@ -28,7 +28,8 @@ import {eventBus} from '@/main.js'
         enteredWords: [],
         numberOfPlayers: 2,
         definition: "",
-        currentWord: ""
+        currentWord: "",
+        currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 30], ['deadTime', 30]]
       }
     },
 
@@ -127,6 +128,9 @@ import {eventBus} from '@/main.js'
           this.checkWord(word.word, word.name)
         })
       })
+
+      eventBus.$on('change-timer', (timer) => this.currentTime=timer)
+      
 
       eventBus.$on('timer-finished', () => this.timerEnded = true)
 
