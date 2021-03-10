@@ -1,7 +1,7 @@
 <template>
   <div>
-    <button @click="stopTimer" id="stop-button">Stop Timer</button>
-    <button @click="startTimer" id="stop-button">Start Timer</button>
+    <!-- <button @click="stopTimer" id="stop-button">Stop Timer</button>
+    <button @click="startTimer" id="stop-button">Start Timer</button> -->
     <form @submit.prevent="submitWords">
       <div id="player-input-form">
         <div class="player-input">
@@ -36,11 +36,8 @@ export default {
         submitWords(){
             let conundrumWord={}
             if (this.playerOneWord.length === 9){
-                
                 conundrumWord = {name: "Player One", word: this.playerOneWord}
-                console.log('player 1', conundrumWord);
             } else if (this.playerTwoWord.length === 9){
-                console.log('player 2');
                 conundrumWord = {name: "Player Two", word: this.playerTwoWord}
             }
             eventBus.$emit('conundrum-answered', conundrumWord)
@@ -48,6 +45,10 @@ export default {
 
         stopTimer(){
           eventBus.$emit('stop-timer-button')
+        },
+
+        startTimer(){
+          eventBus.$emit('start-timer-button')
         }
     },
     mounted(){

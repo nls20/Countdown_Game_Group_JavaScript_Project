@@ -13,15 +13,27 @@ import {GChart} from 'vue-google-charts'
         props: ['times', 'stopTimer'],
        
         mounted() {
-             let changeTimer = setInterval(() => {
+            this.timer()
+
+            eventBus.$on('start-timer-button', () => {
+                console.log('timer started');
+                this.timer()
+            })
+
+            eventBus.$on('stop-timer-button', () => {
+                console.log('timer stopped');
+                this.timer(true)
+            })
+        },
+        methods: {
+            timer(stopped = false){
+                let changeTimer = setInterval(() => {
                 let newTime = [...this.times]
                 newTime[1][1] += 0.1
-                console.log('timer', this.stopTimer);
-
-                if (this.stopTimer){
-                    clearInterval(changeTimer)
-                    eventBus.$emit('timer-stopped', newTime)
-                } else if (newTime[1][1] > 3){
+                // if (stopped){
+                //     clearInterval(changeTimer)
+                // } else 
+                if (newTime[1][1] > 30){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-finished')
                 } else {
@@ -29,6 +41,7 @@ import {GChart} from 'vue-google-charts'
                     newTime[2][1] -=0.1
                 }
             }, 100);
+            }
         },
         components:{
             'google-chart': GChart
@@ -37,15 +50,6 @@ import {GChart} from 'vue-google-charts'
 </script>
 
 <style lang="css" scoped>
-
-/* h2 {
-  font-size: 30px;
-  text-align: center;
-  border-width: 2px;
-  border: solid darkblue 2px;
-  width: 200px;
-  background-color: white;
-} */
 
 section {
     display: grid;

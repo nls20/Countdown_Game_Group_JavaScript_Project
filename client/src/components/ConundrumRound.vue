@@ -6,7 +6,7 @@
                 <h2>CONUNDRUM ROUND</h2>
                 <h2>Player 2: {{players[1].score}}</h2>
             </div>
-            <timer :stopTimer="stopTimer" :times="currentTime"/>
+            <timer v-if="!stopTimer" :stopTimer="stopTimer" :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
             <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer" :fullGame="fullGame"/>
@@ -66,7 +66,11 @@ export default {
 
         eventBus.$on('stop-timer-button',() => this.stopTimer = true)
 
+        eventBus.$on('start-timer-button', () => this.stopTimer = false)
+
         eventBus.$on('change-timer', (timer) => this.currentTime=timer)
+
+        eventBus.$on('timer-stopped', (timer) => this.currentTime = timer)
 
         this.getConundrumWord()
 
