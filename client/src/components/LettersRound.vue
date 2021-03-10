@@ -18,6 +18,7 @@ import SubmitAnswers from '@/components/Letters/SubmitAnswers.vue'
 
 import {eventBus} from '@/main.js'
   export default {
+    props: ['fullGame'],
 
     data(){
       return {
