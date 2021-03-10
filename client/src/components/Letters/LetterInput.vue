@@ -13,8 +13,8 @@ import {eventBus} from '@/main.js'
         data(){
             return {
                 letterToAdd: "",
-                consonants: ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'],
-                vowels: ['a', 'e', 'i', 'o', 'u']
+                consonants: ['b','b', 'c', 'c', 'd', 'd', 'd', 'd', 'f', 'f', 'g', 'g', 'g', 'g', 'h', 'h', 'j', 'k', 'l', 'l', 'l', 'l', 'l', 'm', 'm', 'm', 'n', 'n', 'n', 'n', 'n', 'p', 'p', 'p', 'q', 'r', 's', 't', 'r', 's', 't', 'r', 's', 't', 'r', 's', 't', 'v', 'w', 'w', 'x', 'y', 'y', 'z'],
+                vowels: ['a', 'e', 'a', 'e', 'a', 'e', 'a', 'e', 'i', 'i', 'i', 'o', 'o', 'o', 'u', 'u']
             }
         },
         methods:{
