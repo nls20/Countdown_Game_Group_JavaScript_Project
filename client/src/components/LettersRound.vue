@@ -164,7 +164,7 @@ section{
 h2 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 
 </style>

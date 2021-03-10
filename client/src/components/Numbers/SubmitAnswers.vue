@@ -44,6 +44,7 @@ import {eventBus} from '@/main.js'
   display: grid;
   justify-content: center;
   margin: 0px 30px;
+  font-size: 25px;
 }
 
 .player-input>label{
@@ -58,6 +59,12 @@ import {eventBus} from '@/main.js'
 #player-input-form{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px;
+}
+
+#submit-button{
+  display:grid;
   justify-content: center;
 }
 

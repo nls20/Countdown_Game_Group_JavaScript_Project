@@ -27,14 +27,15 @@
 
 <style lang="css" scoped>
 
-section{
+/* section{
     display: grid;
     grid-template-rows: 1fr 1fr;
-}
+} */
 
 #target-number{
     text-align: center;
 }
+
 
 #number-grid{
     display: flex;
@@ -48,8 +49,8 @@ section{
     background-color: blue;
     color: white;
     padding:8px;
-    width: 50px;
-    height: 50px;
+    width: 75px;
+    height: 75px;
     font-size: xx-large;
     justify-content: center;
     align-items: center;
@@ -59,7 +60,7 @@ section{
     background-color: white;
     border: solid darkblue 2px;
     border-width: 4px;
-    width: 668px;
+    width: 595px; 
 }
 
 </style>
