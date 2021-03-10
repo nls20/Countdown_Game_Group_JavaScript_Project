@@ -1,6 +1,10 @@
 <template >
   <div>
-    <header>COUNTDOWN</header>
+    <header>
+        <h1>Player 1: </h1>
+        <h1>COUNTDOWN</h1> 
+        <h1>Player 2: </h1>
+      </header>
     <section >
       <button v-if="game === 0" @click="gameSelect('Letters')">Letters</button>
       <button v-if="game === 0" @click="gameSelect('Numbers')">Numbers</button>
