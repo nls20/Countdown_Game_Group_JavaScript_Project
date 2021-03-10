@@ -1,7 +1,11 @@
 <template>
   <div>
         <section id="background">
-            <h2>CONUNDRUM ROUND</h2>
+            <div id="scores">
+                <h2>Player 1: {{players[0].score}}</h2>
+                <h2>CONUNDRUM ROUND</h2>
+                <h2>Player 2: {{players[0].score}}</h2>
+            </div>
             <timer :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />

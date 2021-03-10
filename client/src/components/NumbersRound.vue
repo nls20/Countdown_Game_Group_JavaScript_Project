@@ -1,6 +1,10 @@
 <template>
     <section>
-        <h2>NUMBERS ROUND</h2>
+        <div id="scores">
+            <h2>Player 1: {{players[0].score}}</h2>
+            <h2>NUMBERS ROUND</h2>
+            <h2>Player 2: {{players[0].score}}</h2>
+        </div>
         <timer :times="currentTime"/>
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
