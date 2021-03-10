@@ -54,10 +54,7 @@ import {eventBus} from '@/main.js'
       eventBus.$on('add-scores', (score) => {
         this.players.filter((player) => {
           if (player.name === score.name){
-            console.log('1s', score);
             player.score += score.score
-            console.log('score 1', score);
-            console.log('score', player.score);
           }
         })
       })

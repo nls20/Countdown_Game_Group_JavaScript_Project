@@ -103,7 +103,6 @@ import {eventBus} from '@/main.js'
       },
 
       addScores(passedPlayer){
-        console.log('player', passedPlayer);
         if (passedPlayer.word.length === 9){
             let addScores = {name: passedPlayer.name, score: 18}
             eventBus.$emit('add-scores', addScores)

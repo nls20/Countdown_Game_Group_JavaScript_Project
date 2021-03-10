@@ -3,7 +3,7 @@
         <div id="scores">
             <h2>Player 1: {{players[0].score}}</h2>
             <h2>NUMBERS ROUND</h2>
-            <h2>Player 2: {{players[0].score}}</h2>
+            <h2>Player 2: {{players[1].score}}</h2>
         </div>
         <timer v-if="targetNumber > 0" :times="currentTime"/>
         <choose-numbers />
@@ -30,7 +30,6 @@ import {eventBus} from '@/main.js'
                 playingNumbers: [],
                 targetNumber: 0,
                 submitClicked: false,
-                players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}],
                 currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             }
         },
@@ -90,6 +89,7 @@ import {eventBus} from '@/main.js'
                 } else {
                     this.declareWinner('Draw', playerOneDifference)
                 }
+                this.submitClicked = true
             })
 
             eventBus.$on('change-timer', (timer) => this.currentTime=timer)
@@ -105,6 +105,9 @@ import {eventBus} from '@/main.js'
 
             eventBus.$on('reset-everything', () => {
                 this.timerEnded = false
+                this.playingNumbers = []
+                this.targetNumber = 0
+                this.submitClicked = false
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
 
             })
