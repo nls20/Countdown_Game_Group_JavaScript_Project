@@ -20,14 +20,9 @@
             
         </div>
         
-<<<<<<< HEAD
-        <button class="submit-button" @click="equals" >Check Calculation</button>
-
-=======
         <button class="submit-button" @click="equals" >Submit Answer</button>
         <button v-if="fullGame" @click="nextRound">Next Round</button>
         <button v-if="!fullGame" @click="resetEverything">Reset Game</button>
->>>>>>> develop
     </div>
 </template>
 

@@ -7,7 +7,7 @@
             <input type="text" name="player_one_input" v-model="playerOneWord" required >
             <p v-if="submitClicked && !pOneWord">This is not a word</p>
             <button class="definition-button" v-if="submitClicked && !definitionOneClicked && pOneWord" @click="getWordDefinition('Player One')">Definition</button>
-            <p v-if="submitClicked && definitionOneClicked && pOneWord">{{playerOneMeaning}}</p>
+            <p class="definition" v-if="submitClicked && definitionOneClicked && pOneWord">{{playerOneMeaning}}</p>
 
           </div>
 
@@ -18,7 +18,7 @@
               {{ playerTwoMeaning }}
             </p>
             <button class="definition-button" v-if="submitClicked && !definitionTwoClicked && pTwoWord" @click="getWordDefinition('Player Two')">Definition</button>
-            <p v-if="submitClicked && definitionTwoClicked && pTwoWord">{{playerTwoMeaning}}</p>
+            <p class="definition" v-if="submitClicked && definitionTwoClicked && pTwoWord">{{playerTwoMeaning}}</p>
           </div>
         </div>
         <div id="submit-button" >
@@ -138,6 +138,7 @@ import {eventBus} from '@/main.js'
   justify-content: center;
   margin: 0px 30px;
   font-size: 25px;
+  align-self: start;
 }
 
 .player-input>label{
@@ -218,6 +219,10 @@ import {eventBus} from '@/main.js'
 	text-decoration:none;
 	text-shadow:0px 1px 0px #74a822;
   margin: 20px 50px;
+}
+
+.definition {
+  max-width: 275px;
 }
 
 </style>
