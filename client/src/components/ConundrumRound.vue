@@ -55,6 +55,15 @@ export default {
         eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 
         this.getConundrumWord()
+
+        eventBus.$on('next-round', () => {
+            this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+            this.timerEnded = false
+            this.enteredWords = []
+            for (let player of this.players){
+                player.word = ""
+            }
+        })
     },
     computed:{
         

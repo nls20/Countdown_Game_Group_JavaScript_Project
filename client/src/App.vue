@@ -22,7 +22,7 @@ import {eventBus} from '@/main.js'
       return {
         game: 0,
         currentRoundNumber: 0,
-        fullGameRounds: ['Letters', 'Numbers', 'Conundrum'],
+        fullGameRounds: ['Letters', 'Letters', 'Numbers', 'Conundrum'],
         fullGame: false
       }
     },

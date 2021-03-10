@@ -21,13 +21,14 @@
         </div>
         
         <button class="submit-button" @click="equals" >Submit Answer</button>
-
+        <button v-if="submitClicked && fullGame" @click="nextRound">Next Round</button>
+          <button v-if="submitClicked && !fullGame" @click="resetEverything">Reset Game</button>
     </div>
 </template>
 
 <script>
     export default {
-        props: ['numbers'],
+        props: ['numbers', 'fullGame'],
 
         data(){
             return {
