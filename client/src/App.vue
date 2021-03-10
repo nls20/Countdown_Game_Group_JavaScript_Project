@@ -72,7 +72,7 @@ button {
 	cursor:pointer;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:large;
+	font-size: large;
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
@@ -93,9 +93,9 @@ button:active {
 }
 
 header {
-  font-size: 100px;
+  font-size: 110px;
   text-align: center;
-  padding: 30px;
+  padding: 10px;
   color: #004e98;
   font-weight: 700;
   text-shadow: 0 0 3px white;

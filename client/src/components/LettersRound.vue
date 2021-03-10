@@ -174,9 +174,11 @@ section{
 }
 
 h2 {
-  font-size: 40px;
+  font-size: 60px;
   text-align: center;
   margin: 0px;
+  color: white;
+  text-shadow: 0 0 5px #034078;
 }
 
 </style>

@@ -51,6 +51,8 @@ section {
 #pie-chart {
     width: 400px;
     height: 400px;
+    padding: 0;
+    margin: 0;
 }
 
 </style>

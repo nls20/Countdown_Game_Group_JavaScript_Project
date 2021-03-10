@@ -46,8 +46,9 @@ section > div {
     text-align: center;
     color: greenyellow;
     background-color: black;
-    width: 90px;
-    height: 60px;
+    font-size: 50px;
+    width: 120px;
+    height: 80px;
     justify-content: center;
     align-items: center;
     border: gray solid 4px;
@@ -63,7 +64,7 @@ section > div {
 #number-grid> p{
     display: grid;
     margin: 4px;
-    background-color: blue;
+    background-color:#004e98;;
     color: white;
     padding:8px;
     width: 75px;

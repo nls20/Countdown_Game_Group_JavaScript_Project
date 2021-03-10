@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3>Choose number of large numbers</h3>
+        <h3>Select Large Numbers</h3>
         <div id="choose-numbers">
             <button class="large-button" @click="setLargeNumber(0)">0</button>
             <button class="large-button" @click="setLargeNumber(1)">1</button>
@@ -51,8 +51,25 @@ import {eventBus} from '@/main.js'
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
     margin: 5px 10px;
-    width: 70px;
-    height: 40px
+    width: 75px;
+    height: 70px
+}
+
+button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
+h3 {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #034078;
+  text-shadow: 0 0 5px white;
 }
 
 </style>

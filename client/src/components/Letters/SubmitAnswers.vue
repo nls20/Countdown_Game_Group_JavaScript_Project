@@ -144,6 +144,10 @@ import {eventBus} from '@/main.js'
 .player-input>label{
   text-align: center;
   margin-bottom: 5px;
+  color: #034078;
+  font-size: 30px;
+  font-weight: 500;
+  text-shadow: 0 0 8px white;
 }
 
 
@@ -182,6 +186,16 @@ import {eventBus} from '@/main.js'
   margin: 20px 40px;
   width: 180px;
   height: 100px
+}
+
+#submit-button>input:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+
+#submit-button>input:hover {
+  position:relative;
+	top:1px;
 }
 
 #submit-button>button{
@@ -230,10 +244,19 @@ import {eventBus} from '@/main.js'
   margin: 20px 50px;
 }
 
+.definition-button:hover {
+	background:linear-gradient(to bottom, #4acc5d 5%, #69e356 100%);
+	background-color:#1e62d0;
+}
+.definition-button:active {
+	position:relative;
+	top:1px;
+}
 
 
 .definition {
   max-width: 275px;
+  color: #034078;
 }
 
 </style>

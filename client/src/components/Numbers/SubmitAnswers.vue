@@ -45,12 +45,15 @@ import {eventBus} from '@/main.js'
   display: grid;
   justify-content: center;
   margin: 0px 30px;
-  font-size: 25px;
 }
 
 .player-input>label{
   text-align: center;
   margin-bottom: 5px;
+  color: #034078;
+  font-size: 25px;
+  font-weight: 500;
+  text-shadow: 0 0 8px white;
 }
 
 .player-input>input{
@@ -85,6 +88,15 @@ import {eventBus} from '@/main.js'
   margin: 20px 40px;
   width: 180px;
   height: 100px
+}
+
+#submit-button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+#submit-button:active {
+	position:relative;
+	top:1px;
 }
 
 

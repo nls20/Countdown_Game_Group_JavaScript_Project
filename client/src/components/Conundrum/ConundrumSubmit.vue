@@ -100,4 +100,24 @@ export default {
   height: 100px
 }
 
+#submit-button:hover{
+  background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+
+#submit-button:active{
+  position:relative;
+	top:1px;
+}
+
+#stop-button:hover{
+  background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+
+#stop-button:hover{
+  position:relative;
+	top:1px;
+}
+
 </style>

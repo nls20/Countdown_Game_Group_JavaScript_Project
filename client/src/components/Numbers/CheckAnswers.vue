@@ -194,4 +194,13 @@ import {eventBus} from '@/main.js'
     height: 40px
 }
 
+button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
+}
+button:active {
+	position:relative;
+	top:1px;
+}
+
 </style>
