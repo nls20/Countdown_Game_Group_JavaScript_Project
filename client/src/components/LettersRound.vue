@@ -4,7 +4,7 @@
         <div id="scores">
           <h2>Player 1: {{players[0].score}}</h2>
           <h2>LETTERS ROUND</h2>
-          <h2>Player 2: {{players[0].score}}</h2>
+          <h2>Player 2: {{players[1].score}}</h2>
         </div>
         
         <timer v-if="letters.length === 9" :times="currentTime"/>
@@ -27,8 +27,8 @@ import {eventBus} from '@/main.js'
 
     data(){
       return {
-        // letters: ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd'],
-        letters:[],
+        letters: ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd'],
+        // letters:[],
         timerEnded: false,
         enteredWords: [],
         numberOfPlayers: 2,
@@ -103,10 +103,13 @@ import {eventBus} from '@/main.js'
       },
 
       addScores(passedPlayer){
+        console.log('player', passedPlayer);
         if (passedPlayer.word.length === 9){
-            passedPlayer.score += 18
+            let addScores = {name: passedPlayer.name, score: 18}
+            eventBus.$emit('add-scores', addScores)
           } else {
-            passedPlayer.score += passedPlayer.word.length
+            let addScores = {name: passedPlayer.name, score: passedPlayer.word.length}
+            eventBus.$emit('add-scores', addScores)
           }
       },
 

@@ -27,7 +27,7 @@ import {eventBus} from '@/main.js'
         currentRoundNumber: 0,
         fullGameRounds: ['Letters', 'Letters', 'Numbers', 'Conundrum'],
         fullGame: false,
-        players: [{name: 'Player 1', word: "", score: 0},{name: 'Player 2', word: "", score: 0}]
+        players: [{name: 'Player One', word: "", score: 0},{name: 'Player Two', word: "", score: 0}]
       }
     },
     components:{
@@ -49,6 +49,17 @@ import {eventBus} from '@/main.js'
       eventBus.$on('next-round', () => {
         this.currentRoundNumber++
         this.game = this.fullGameRounds[this.currentRoundNumber-1]
+      })
+
+      eventBus.$on('add-scores', (score) => {
+        this.players.filter((player) => {
+          if (player.name === score.name){
+            console.log('1s', score);
+            player.score += score.score
+            console.log('score 1', score);
+            console.log('score', player.score);
+          }
+        })
       })
       
     }
