@@ -15,30 +15,18 @@ import {GChart} from 'vue-google-charts'
     export default {
         name: 'timer',
         props: ['times'],
-        data(){
-            return{
-                
-            }
-        },
+       
         mounted() {
-            // let changeTimer = setInterval(() => {
-            //         this.countdownTimer--
-            //         if (this.countdownTimer<= 0){
-            //             clearInterval(changeTimer)
-            //             this.countdownTimer = 'Time Up'
-            //             eventBus.$emit('timer-finished')
-            //         }
-            //     }, 1000)
-
              let changeTimer = setInterval(() => {
                 let newTime = [...this.times]
-                console.log('times', this.times);
                 newTime[1][1]++
-                newTime[2][1]--
+                
                 if (newTime[1][1] === 31){
                     clearInterval(changeTimer)
+                    eventBus.$emit('timer-finished')
                 } else {
                     eventBus.$emit('change-timer', newTime)
+                    newTime[2][1]--
                 }
             }, 1000);
         },

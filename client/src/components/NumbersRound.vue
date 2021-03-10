@@ -1,6 +1,6 @@
 <template>
     <section>
-        <timer />
+        <timer :times="currentTime"/>
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
         <submit-answers />
@@ -23,7 +23,8 @@ import {eventBus} from '@/main.js'
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
                 playingNumbers: [],
                 targetNumber: 0,
-                players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}]
+                players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}],
+                currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             }
         },
         methods:{
@@ -82,6 +83,8 @@ import {eventBus} from '@/main.js'
                     this.declareWinner('Draw', playerOneDifference)
                 }
             })
+
+            eventBus.$on('change-timer', (timer) => this.currentTime=timer)
         },
         
         components:{

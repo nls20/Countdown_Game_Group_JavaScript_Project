@@ -29,7 +29,7 @@ import {eventBus} from '@/main.js'
         numberOfPlayers: 2,
         definition: "",
         currentWord: "",
-        currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 30], ['deadTime', 30]]
+        currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
       }
     },
 
