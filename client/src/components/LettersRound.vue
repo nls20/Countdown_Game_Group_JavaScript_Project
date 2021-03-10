@@ -151,6 +151,8 @@ import {eventBus} from '@/main.js'
         for (let player of this.players){
           player.word = ""
         }
+        this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
       })
     },
     

@@ -21,12 +21,13 @@
         </div>
         
         <button class="submit-button" @click="equals" >Submit Answer</button>
-        <button v-if="submitClicked && fullGame" @click="nextRound">Next Round</button>
-          <button v-if="submitClicked && !fullGame" @click="resetEverything">Reset Game</button>
+        <button v-if="fullGame" @click="nextRound">Next Round</button>
+        <button v-if="!fullGame" @click="resetEverything">Reset Game</button>
     </div>
 </template>
 
 <script>
+import {eventBus} from '@/main.js'
     export default {
         props: ['numbers', 'fullGame'],
 
@@ -34,14 +35,18 @@
             return {
                 calculation: "",
                 operator: "",
-                firstNumber: 0,
-                mathOperators: {
-                '+': function(x,y){return x+y}
-                }
+                firstNumber: 0
             }
         },
         
         methods:{
+
+            resetEverything(){
+                eventBus.$emit('reset-everything')
+                this.calculation = "",
+                this.operator = "",
+                this.firstNumber = 0
+            },
 
             divide(){
                 this.calculation += ' / '

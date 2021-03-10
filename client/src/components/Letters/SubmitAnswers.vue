@@ -65,6 +65,7 @@ import {eventBus} from '@/main.js'
 
         nextRound(){
           eventBus.$emit('next-round')
+          this.resetEverything()
         },
         
         getWordDefinition(playerName){

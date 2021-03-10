@@ -46,6 +46,7 @@ import {eventBus} from '@/main.js'
         this.currentRoundNumber++
         this.game = this.fullGameRounds[this.currentRoundNumber-1]
       })
+      
     }
   }
 

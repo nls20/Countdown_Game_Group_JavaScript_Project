@@ -32,6 +32,7 @@ import {eventBus} from '@/main.js'
             resetEverything(){
                 this.playerNumbers = []
                 this.targetNumber = 0
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             },
             declareWinner(playerName, pointsDifference){
                 if (pointsDifference === 0){
@@ -88,12 +89,18 @@ import {eventBus} from '@/main.js'
             eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 
             eventBus.$on('next-round', () => {
-                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+                this.resetEverything()
                 this.timerEnded = false
                 this.enteredWords = []
                 for (let player of this.players){
-                player.word = ""
+                    player.word = ""
                 }
+            })
+
+            eventBus.$on('reset-everything', () => {
+                this.timerEnded = false
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
             })
         },
         
