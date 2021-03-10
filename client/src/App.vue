@@ -4,6 +4,7 @@
     <button v-if="gameNumber === 0" @click="gameSelect('Numbers')">Numbers</button>
     <button v-if="gameNumber === 0" @click="gameSelect('Conundrum')">Conundrum</button>
     <button v-if="gameNumber === 0" @click="gameSelect('Full Game')">Full Game</button>
+    <h1 v-if="fullGame">Round {{currentRoundNumber}}</h1>
     <letter-round v-if="gameNumber === 'Letters'" />
     <conundrum v-if="gameNumber === 'Conundrum'" />
     <number-round v-if="gameNumber === 'Numbers'" />
@@ -34,6 +35,7 @@ import NumbersRound from '@/components/NumbersRound.vue'
         if (gameNumber === 'Full Game'){
           this.gameNumber = 'Letters'
           this.fullGame = true
+          this.currentRoundNumber = 1
         }
       }
     }
