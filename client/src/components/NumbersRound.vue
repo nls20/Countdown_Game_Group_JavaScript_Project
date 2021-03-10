@@ -5,11 +5,11 @@
             <h2>NUMBERS ROUND</h2>
             <h2>Player 2: {{players[0].score}}</h2>
         </div>
-        <timer :times="currentTime"/>
+        <timer v-if="targetNumber > 0" :times="currentTime"/>
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
-        <submit-answers />
-        <check-answers :numbers="playingNumbers" :fullGame="fullGame" />
+        <submit-answers v-if="targetNumber > 0" />
+        <check-answers v-if="submitClicked" :numbers="playingNumbers" :fullGame="fullGame" />
     </section>
 </template>
 
@@ -29,6 +29,7 @@ import {eventBus} from '@/main.js'
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
                 playingNumbers: [],
                 targetNumber: 0,
+                submitClicked: false,
                 players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}],
                 currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             }
