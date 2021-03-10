@@ -20,9 +20,9 @@
             
         </div>
         
-        <button class="submit-button" @click="equals" >Check Calculation</button>
-        <button v-if="fullGame" @click="nextRound">Next Round</button>
-        <button v-if="!fullGame" @click="resetEverything">Reset Game</button>
+        <button class="submit-button" @click="equals" >Check Answer</button>
+        <button class="submit-button" v-if="fullGame" @click="nextRound">Next Round</button>
+        <button class="submit-button" v-if="!fullGame" @click="resetEverything">Reset Game</button>
     </div>
 </template>
 
@@ -156,7 +156,7 @@ import {eventBus} from '@/main.js'
 	text-shadow:0px 1px 0px #1570cd;
     margin: 20px 40px;
     width: 180px;
-    height: 100px
+    height: 100px;
 }
 
 .answer-button {

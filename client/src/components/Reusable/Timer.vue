@@ -21,7 +21,7 @@ import {GChart} from 'vue-google-charts'
                 if (this.stopTimer){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-stopped', newTime)
-                } else if (newTime[1][1] > 30){
+                } else if (newTime[1][1] > 3){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-finished')
                 } else {

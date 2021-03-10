@@ -115,9 +115,13 @@ button {
     height: 100px
 }
 
+
 h2 {
-  font-size: 40px;
   text-align: center;
+  font-size: 60px;
+  margin: 0px;
+  color: white;
+  text-shadow: 0 0 5px #034078;
   margin-bottom: 30px;
   margin-left: 20px;
   margin-right: 20px;

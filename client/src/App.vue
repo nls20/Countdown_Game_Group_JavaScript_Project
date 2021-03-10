@@ -1,6 +1,7 @@
 <template >
   <div>
     <header>COUNTDOWN</header>
+    <h2 v-if="game === 0">CHOOSE YOUR GAME</h2>
     <section >
       <button v-if="game === 0" @click="gameSelect('Letters')">Letters</button>
       <button v-if="game === 0" @click="gameSelect('Numbers')">Numbers</button>
@@ -10,6 +11,7 @@
       <letter-round v-if="game === 'Letters'" :players="players" :fullGame="fullGame" />
       <conundrum v-if="game === 'Conundrum'" :players="players" :fullGame="fullGame"/>
       <number-round v-if="game === 'Numbers'" :players="players" :fullGame="fullGame"/>
+      <p id="total-div"></p>
     </section>
   </div>  
 </template>
@@ -71,6 +73,10 @@ import {eventBus} from '@/main.js'
   background-color: #ADD8E6;
 }
 
+#total-div {
+  height: 300px;
+}
+
 button {
   box-shadow:inset 0px 1px 0px 0px #97c4fe;
 	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
@@ -102,7 +108,7 @@ button:active {
 }
 
 header {
-  font-size: 110px;
+  font-size: 120px;
   text-align: center;
   padding: 10px;
   color: #004e98;
@@ -112,6 +118,20 @@ header {
 
 section {
   text-align: center;
+}
+
+
+h2 {
+  font-size: 60px;
+  text-align: center;
+  margin: 0px;
+  color: white;
+  text-shadow: 0 0 5px #034078;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
+
 }
 
 
