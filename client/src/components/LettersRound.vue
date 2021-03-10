@@ -5,7 +5,7 @@
             <timer v-if="letters.length === 9" :times="currentTime"/>
             <letters-board :letters="letters"/>
             <letter-input v-if="letters.length < 9" />
-            <submit-answers :players="players"/>
+            <submit-answers :players="players" :fullGame="fullGame"/>
         </section>
     </div>
 </template>
@@ -128,6 +128,15 @@ import {eventBus} from '@/main.js'
         words.forEach((word) => {
           this.checkWord(word.word, word.name)
         })
+      })
+
+      eventBus.$on('next-round', () => {
+        this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+        this.timerEnded = false
+        this.enteredWords = []
+        for (let player of this.players){
+          player.word = ""
+        }
       })
 
       eventBus.$on('change-timer', (timer) => this.currentTime=timer)

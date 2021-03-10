@@ -1,13 +1,13 @@
 <template >
   <section >
-    <button v-if="gameNumber === 0" @click="gameSelect('Letters')">Letters</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Numbers')">Numbers</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Conundrum')">Conundrum</button>
-    <button v-if="gameNumber === 0" @click="gameSelect('Full Game')">Full Game</button>
+    <button v-if="game === 0" @click="gameSelect('Letters')">Letters</button>
+    <button v-if="game === 0" @click="gameSelect('Numbers')">Numbers</button>
+    <button v-if="game === 0" @click="gameSelect('Conundrum')">Conundrum</button>
+    <button v-if="game === 0" @click="gameSelect('Full Game')">Full Game</button>
     <h1 v-if="fullGame">Round {{currentRoundNumber}}</h1>
-    <letter-round v-if="gameNumber === 'Letters'" :fullGame="fullGame" />
-    <conundrum v-if="gameNumber === 'Conundrum'" :fullGame="fullGame"/>
-    <number-round v-if="gameNumber === 'Numbers'" :fullGame="fullGame"/>
+    <letter-round v-if="game === 'Letters'" :fullGame="fullGame" />
+    <conundrum v-if="game === 'Conundrum'" :fullGame="fullGame"/>
+    <number-round v-if="game === 'Numbers'" :fullGame="fullGame"/>
   </section>
 </template>
 
@@ -15,10 +15,12 @@
 import LetterRound from '@/components/LettersRound.vue'
 import ConundrumRound from '@/components/ConundrumRound.vue'
 import NumbersRound from '@/components/NumbersRound.vue'
+
+import {eventBus} from '@/main.js'
   export default {
     data(){
       return {
-        gameNumber: 0,
+        game: 0,
         currentRoundNumber: 0,
         fullGameRounds: ['Letters', 'Numbers', 'Conundrum'],
         fullGame: false
@@ -31,13 +33,19 @@ import NumbersRound from '@/components/NumbersRound.vue'
     },
     methods:{
       gameSelect(gameNumber){
-        this.gameNumber = gameNumber
+        this.game = gameNumber
         if (gameNumber === 'Full Game'){
-          this.gameNumber = 'Letters'
+          this.game = 'Letters'
           this.fullGame = true
           this.currentRoundNumber = 1
         }
       }
+    },
+    mounted(){
+      eventBus.$on('next-round', () => {
+        this.currentRoundNumber++
+        this.game = this.fullGameRounds[this.currentRoundNumber-1]
+      })
     }
   }
 
