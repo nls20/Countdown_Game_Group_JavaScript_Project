@@ -5,7 +5,7 @@
         <choose-numbers />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
         <submit-answers />
-        <check-answers :numbers="playingNumbers" />
+        <check-answers :numbers="playingNumbers" :fullGame="fullGame" />
     </section>
 </template>
 
@@ -18,6 +18,7 @@ import CheckAnswers from '@/components/Numbers/CheckAnswers.vue'
 
 import {eventBus} from '@/main.js'
     export default {
+        props: ['fullGame'],
         data(){
             return {
                 largeNumbers: [25, 50, 75, 100],
@@ -32,6 +33,7 @@ import {eventBus} from '@/main.js'
             resetEverything(){
                 this.playerNumbers = []
                 this.targetNumber = 0
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             },
             declareWinner(playerName, pointsDifference){
                 if (pointsDifference === 0){
@@ -86,6 +88,21 @@ import {eventBus} from '@/main.js'
             })
 
             eventBus.$on('change-timer', (timer) => this.currentTime=timer)
+
+            eventBus.$on('next-round', () => {
+                this.resetEverything()
+                this.timerEnded = false
+                this.enteredWords = []
+                for (let player of this.players){
+                    player.word = ""
+                }
+            })
+
+            eventBus.$on('reset-everything', () => {
+                this.timerEnded = false
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
+            })
         },
         
         components:{

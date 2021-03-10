@@ -23,7 +23,8 @@
         </div>
         <div id="submit-button" >
           <input v-if="!submitClicked" type="submit" value="Submit words">
-          <button v-if="submitClicked" @click="resetEverything">Reset</button>
+          <button v-if="submitClicked && fullGame" @click="nextRound">Next Round</button>
+          <button v-if="submitClicked && !fullGame" @click="resetEverything">Reset Game</button>
         </div>
       </form>
   </section>
@@ -33,7 +34,7 @@
 import {eventBus} from '@/main.js'
 
     export default {
-      props: ['players'],
+      props: ['players', 'fullGame'],
             
       data(){
         return{
@@ -60,6 +61,11 @@ import {eventBus} from '@/main.js'
           ]
           eventBus.$emit('player-words', words)
           this.submitClicked = true
+        },
+
+        nextRound(){
+          eventBus.$emit('next-round')
+          this.resetEverything()
         },
         
         getWordDefinition(playerName){

@@ -1,19 +1,19 @@
 <template>
   <div>
-        <button id="stop-button">Stop Timer</button>
-        <form id="player-input-form" @submit.prevent="submitWords">
-                <div class="player-input">
-                    <label for="playerOne">Player One: </label>
-                    <input type="text" name="playerOne" v-model="playerOneWord">
-                </div>
-            
-                <div class="player-input">  
-                    <label for="playerTwo">Player Two: </label>
-                    <input type="text" name="playerTwo" v-model="playerTwoWord" >
-                </div>
+    <button id="stop-button">Stop Timer</button>
+    <form id="player-input-form" @submit.prevent="submitWords">
+            <div class="player-input">
+                <label for="playerOne">Player One: </label>
+                <input type="text" name="playerOne" v-model="playerOneWord">
+            </div>
+        
+            <div class="player-input">  
+                <label for="playerTwo">Player Two: </label>
+                <input type="text" name="playerTwo" v-model="playerTwoWord" >
+            </div>
 
-                <input id="submit-button" type="submit" value="Submit Answer">
-        </form>
+            <input id="submit-button" type="submit" value="Submit Answer">
+    </form>
   </div>
 </template>
 
@@ -42,7 +42,14 @@ export default {
             }
             eventBus.$emit('conundrum-answered', conundrumWord)
         }
-    }
+    },
+    mounted(){
+      eventBus.$on('reset-everything', () => {
+        this.playerOneWord = ""
+        this.playerTwoWord = ""
+
+    })
+  }
 
 }
 </script>

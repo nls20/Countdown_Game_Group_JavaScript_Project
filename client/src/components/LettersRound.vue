@@ -5,7 +5,7 @@
             <timer v-if="letters.length === 9" :times="currentTime"/>
             <letters-board :letters="letters"/>
             <letter-input v-if="letters.length < 9" />
-            <submit-answers :players="players"/>
+            <submit-answers :players="players" :fullGame="fullGame"/>
         </section>
     </div>
 </template>
@@ -18,6 +18,7 @@ import SubmitAnswers from '@/components/Letters/SubmitAnswers.vue'
 
 import {eventBus} from '@/main.js'
   export default {
+    props: ['fullGame'],
 
     data(){
       return {
@@ -129,6 +130,15 @@ import {eventBus} from '@/main.js'
         })
       })
 
+      eventBus.$on('next-round', () => {
+        this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+        this.timerEnded = false
+        this.enteredWords = []
+        for (let player of this.players){
+          player.word = ""
+        }
+      })
+
       eventBus.$on('change-timer', (timer) => this.currentTime=timer)
       
 
@@ -141,6 +151,8 @@ import {eventBus} from '@/main.js'
         for (let player of this.players){
           player.word = ""
         }
+        this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
       })
     },
     

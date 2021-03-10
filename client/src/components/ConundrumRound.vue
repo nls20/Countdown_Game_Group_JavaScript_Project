@@ -5,7 +5,7 @@
             <timer :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
-            <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer"/>
+            <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer" :fullGame="fullGame"/>
         </section>
     </div>
 </template>
@@ -21,6 +21,7 @@ import CountdownService from '@/services/CountdownService'
 import {eventBus} from '@/main.js'
 
 export default {
+    props: ['fullGame'],
     data(){
         return {
             word: '',
@@ -52,9 +53,24 @@ export default {
             }
         })
 
+        eventBus.$on('reset-everything', () => {
+                this.getConundrumWord()
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
+            })
+
         eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 
         this.getConundrumWord()
+
+        eventBus.$on('next-round', () => {
+            this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+            this.timerEnded = false
+            this.enteredWords = []
+            for (let player of this.players){
+                player.word = ""
+            }
+        })
     },
     computed:{
         
