@@ -5,7 +5,7 @@
             <timer :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
-            <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer"/>
+            <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer" :fullGame="fullGame"/>
         </section>
     </div>
 </template>
@@ -51,6 +51,12 @@ export default {
                 this.correctPlayer = conundrum.name
             }
         })
+
+        eventBus.$on('reset-everything', () => {
+                this.getConundrumWord()
+                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+
+            })
 
         eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 

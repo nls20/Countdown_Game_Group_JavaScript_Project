@@ -40,7 +40,6 @@ import {eventBus} from '@/main.js'
         },
         
         methods:{
-
             resetEverything(){
                 eventBus.$emit('reset-everything')
                 this.calculation = "",
