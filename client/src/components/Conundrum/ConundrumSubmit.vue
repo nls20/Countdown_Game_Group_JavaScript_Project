@@ -1,16 +1,18 @@
 <template>
   <div>
     <button id="stop-button">Stop Timer</button>
-    <form id="player-input-form" @submit.prevent="submitWords">
-            <div class="player-input">
-                <label for="playerOne">Player One: </label>
-                <input type="text" name="playerOne" v-model="playerOneWord">
-            </div>
-        
-            <div class="player-input">  
-                <label for="playerTwo">Player Two: </label>
-                <input type="text" name="playerTwo" v-model="playerTwoWord" >
-            </div>
+    <form @submit.prevent="submitWords">
+      <div id="player-input-form">
+        <div class="player-input">
+            <label for="playerOne">Player One: </label>
+            <input type="text" name="playerOne" v-model="playerOneWord">
+        </div>
+    
+        <div class="player-input">  
+            <label for="playerTwo">Player Two: </label>
+            <input type="text" name="playerTwo" v-model="playerTwoWord" >
+        </div>
+      </div>
 
             <input id="submit-button" type="submit" value="Submit Answer">
     </form>

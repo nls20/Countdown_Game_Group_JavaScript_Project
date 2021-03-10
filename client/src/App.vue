@@ -60,6 +60,7 @@ import {eventBus} from '@/main.js'
 * {
   font-family: sans-serif;
   background-color: #ADD8E6;
+  background-size: auto;
 }
 
 button {

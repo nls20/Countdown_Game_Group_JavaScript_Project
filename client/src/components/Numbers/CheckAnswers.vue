@@ -20,7 +20,7 @@
             
         </div>
         
-        <button class="submit-button" @click="equals" >Submit Answer</button>
+        <button class="submit-button" @click="equals" >Check Calculation</button>
         <button v-if="fullGame" @click="nextRound">Next Round</button>
         <button v-if="!fullGame" @click="resetEverything">Reset Game</button>
     </div>

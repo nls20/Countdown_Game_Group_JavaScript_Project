@@ -1,6 +1,7 @@
 <template>
     <section>
-        <form id="player-input-form" @submit.prevent="submitNumbers">
+        <form @submit.prevent="submitNumbers">
+          <div id="player-input-form">
             <div class="player-input">
                 <label for="playerOne">Player One: </label>
                 <input type="number" name="playerOne" v-model="playerOneNumber">
@@ -10,7 +11,7 @@
                 <label for="playerTwo">Player Two: </label>
                 <input type="number" name="playerTwo" v-model="playerTwoNumber" >
             </div>
-
+          </div>
             <input id="submit-button" type="submit" value="Submit Answer">
       </form>
     </section>
@@ -64,7 +65,6 @@ import {eventBus} from '@/main.js'
 }
 
 #submit-button{
-  display:grid;
   justify-content: center;
 }
 
