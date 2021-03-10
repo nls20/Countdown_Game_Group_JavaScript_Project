@@ -10,14 +10,18 @@ import {eventBus} from '@/main.js'
 import {GChart} from 'vue-google-charts'
     export default {
         name: 'timer',
-        props: ['times'],
+        props: ['times', 'stopTimer'],
        
         mounted() {
              let changeTimer = setInterval(() => {
                 let newTime = [...this.times]
                 newTime[1][1] += 0.1
-                
-                if (newTime[1][1] > 3){
+                console.log('timer', this.stopTimer);
+
+                if (this.stopTimer){
+                    clearInterval(changeTimer)
+                    eventBus.$emit('timer-stopped', newTime)
+                } else if (newTime[1][1] > 30){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-finished')
                 } else {

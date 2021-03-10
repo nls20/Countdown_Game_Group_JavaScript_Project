@@ -1,6 +1,7 @@
 <template>
   <div>
-    <button id="stop-button">Stop Timer</button>
+    <button @click="stopTimer" id="stop-button">Stop Timer</button>
+    <button @click="startTimer" id="stop-button">Start Timer</button>
     <form @submit.prevent="submitWords">
       <div id="player-input-form">
         <div class="player-input">
@@ -43,6 +44,10 @@ export default {
                 conundrumWord = {name: "Player Two", word: this.playerTwoWord}
             }
             eventBus.$emit('conundrum-answered', conundrumWord)
+        },
+
+        stopTimer(){
+          eventBus.$emit('stop-timer-button')
         }
     },
     mounted(){
