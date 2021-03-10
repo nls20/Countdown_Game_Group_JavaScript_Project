@@ -21,6 +21,7 @@ import CountdownService from '@/services/CountdownService'
 import {eventBus} from '@/main.js'
 
 export default {
+    props: ['fullGame'],
     data(){
         return {
             word: '',
