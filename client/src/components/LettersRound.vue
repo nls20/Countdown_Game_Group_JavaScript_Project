@@ -1,12 +1,17 @@
 <template>
     <div>
-        <section id="background">
-            <h2>LETTERS ROUND</h2>
-            <timer v-if="letters.length === 9" :times="currentTime"/>
-            <letters-board :letters="letters"/>
-            <letter-input v-if="letters.length < 9" />
-            <submit-answers :players="players" :fullGame="fullGame"/>
-        </section>
+      <section id="background">
+        <div id="scores">
+          <h2>Player 1: {{players[0].score}}</h2>
+          <h2>LETTERS ROUND</h2>
+          <h2>Player 2: {{players[0].score}}</h2>
+        </div>
+        
+        <timer v-if="letters.length === 9" :times="currentTime"/>
+        <letters-board :letters="letters"/>
+        <letter-input v-if="letters.length < 9" />
+        <submit-answers :players="players" :fullGame="fullGame"/>
+      </section>
     </div>
 </template>
 
@@ -18,14 +23,13 @@ import SubmitAnswers from '@/components/Letters/SubmitAnswers.vue'
 
 import {eventBus} from '@/main.js'
   export default {
-    props: ['fullGame'],
+    props: ['fullGame', 'players'],
 
     data(){
       return {
         letters: ['f', 'i', 'r', 'e', 'b', 'o', 'a', 'r', 'd'],
         // letters:[],
         timerEnded: false,
-        players: [],
         enteredWords: [],
         numberOfPlayers: 2,
         definition: "",
@@ -177,6 +181,15 @@ h2 {
   font-size: 40px;
   text-align: center;
   margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+#scores{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 </style>

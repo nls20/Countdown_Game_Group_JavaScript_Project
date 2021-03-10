@@ -1,17 +1,13 @@
 <template >
   <div>
-    <header>
-        <h1>Player 1: </h1>
-        <h1>COUNTDOWN</h1> 
-        <h1>Player 2: </h1>
-      </header>
+    <header>COUNTDOWN</header>
     <section >
       <button v-if="game === 0" @click="gameSelect('Letters')">Letters</button>
       <button v-if="game === 0" @click="gameSelect('Numbers')">Numbers</button>
       <button v-if="game === 0" @click="gameSelect('Conundrum')">Conundrum</button>
       <button v-if="game === 0" @click="gameSelect('Full Game')">Full Game</button>
       <h1 v-if="fullGame">Round {{currentRoundNumber}}</h1>
-      <letter-round v-if="game === 'Letters'" :fullGame="fullGame" />
+      <letter-round v-if="game === 'Letters'" :players="players" :fullGame="fullGame" />
       <conundrum v-if="game === 'Conundrum'" :fullGame="fullGame"/>
       <number-round v-if="game === 'Numbers'" :fullGame="fullGame"/>
     </section>
@@ -30,7 +26,8 @@ import {eventBus} from '@/main.js'
         game: 0,
         currentRoundNumber: 0,
         fullGameRounds: ['Letters', 'Letters', 'Numbers', 'Conundrum'],
-        fullGame: false
+        fullGame: false,
+        players: [{name: 'Player 1', word: "", score: 0},{name: 'Player 2', word: "", score: 0}]
       }
     },
     components:{
@@ -64,7 +61,6 @@ import {eventBus} from '@/main.js'
 * {
   font-family: sans-serif;
   background-color: #ADD8E6;
-  background-size: auto;
 }
 
 button {
