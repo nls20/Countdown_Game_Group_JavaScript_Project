@@ -47,6 +47,11 @@ import {eventBus} from '@/main.js'
                 this.firstNumber = 0
             },
 
+            nextRound(){
+                eventBus.$emit('next-round')
+                this.resetEverything()
+                },
+
             divide(){
                 this.calculation += ' / '
                 this.operator = true

@@ -7,9 +7,9 @@
       <button v-if="game === 0" @click="gameSelect('Conundrum')">Conundrum</button>
       <button v-if="game === 0" @click="gameSelect('Full Game')">Full Game</button>
       <h1 v-if="fullGame">Round {{currentRoundNumber}}</h1>
-      <letter-round v-if="game === 'Letters'" :fullGame="fullGame" />
-      <conundrum v-if="game === 'Conundrum'" :fullGame="fullGame"/>
-      <number-round v-if="game === 'Numbers'" :fullGame="fullGame"/>
+      <letter-round v-if="game === 'Letters'" :players="players" :fullGame="fullGame" />
+      <conundrum v-if="game === 'Conundrum'" :players="players" :fullGame="fullGame"/>
+      <number-round v-if="game === 'Numbers'" :players="players" :fullGame="fullGame"/>
     </section>
   </div>  
 </template>
@@ -25,8 +25,9 @@ import {eventBus} from '@/main.js'
       return {
         game: 0,
         currentRoundNumber: 0,
-        fullGameRounds: ['Letters', 'Letters', 'Numbers', 'Conundrum'],
-        fullGame: false
+        fullGameRounds: ['Letters', 'Numbers', 'Conundrum'],
+        fullGame: false,
+        players: [{name: 'Player One', word: "", score: 0},{name: 'Player Two', word: "", score: 0}]
       }
     },
     components:{
@@ -48,6 +49,14 @@ import {eventBus} from '@/main.js'
       eventBus.$on('next-round', () => {
         this.currentRoundNumber++
         this.game = this.fullGameRounds[this.currentRoundNumber-1]
+      })
+
+      eventBus.$on('add-scores', (score) => {
+        this.players.filter((player) => {
+          if (player.name === score.name){
+            player.score += score.score
+          }
+        })
       })
       
     }

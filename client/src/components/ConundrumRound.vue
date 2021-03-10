@@ -1,8 +1,12 @@
 <template>
   <div>
         <section id="background">
-            <h2>CONUNDRUM ROUND</h2>
-            <timer :times="currentTime"/>
+            <div id="scores">
+                <h2>Player 1: {{players[0].score}}</h2>
+                <h2>CONUNDRUM ROUND</h2>
+                <h2>Player 2: {{players[1].score}}</h2>
+            </div>
+            <timer :stopTimer="stopTimer" :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit />
             <correct-answer v-if="correctPlayer.length > 0" :playerName="correctPlayer" :fullGame="fullGame"/>
@@ -21,12 +25,13 @@ import CountdownService from '@/services/CountdownService'
 import {eventBus} from '@/main.js'
 
 export default {
-    props: ['fullGame'],
+    props: ['fullGame', 'players'],
     data(){
         return {
             word: '',
             jumbledWord: "",
             correctPlayer: "",
+            stopTimer: false,
             currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
         }
     },
@@ -58,6 +63,8 @@ export default {
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
 
             })
+
+        eventBus.$on('stop-timer-button',() => this.stopTimer = true)
 
         eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 
@@ -111,7 +118,16 @@ button {
 h2 {
   font-size: 40px;
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+#scores{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 </style>

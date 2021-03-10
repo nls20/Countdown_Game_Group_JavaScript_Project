@@ -1,11 +1,15 @@
 <template>
     <section>
-        <h2>NUMBERS ROUND</h2>
-        <timer :times="currentTime"/>
-        <choose-numbers />
+        <div id="scores">
+            <h2>Player 1: {{players[0].score}}</h2>
+            <h2>NUMBERS ROUND</h2>
+            <h2>Player 2: {{players[1].score}}</h2>
+        </div>
+        <timer  v-if="targetNumber > 0 && !timerEnded" :times="currentTime"/>
+        <choose-numbers v-if="targetNumber === 0" />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
-        <submit-answers />
-        <check-answers :numbers="playingNumbers" :fullGame="fullGame" />
+        <submit-answers v-if="targetNumber > 0 && timerEnded" />
+        <check-answers v-if="submitClicked" :numbers="playingNumbers" :fullGame="fullGame" />
     </section>
 </template>
 
@@ -18,22 +22,28 @@ import CheckAnswers from '@/components/Numbers/CheckAnswers.vue'
 
 import {eventBus} from '@/main.js'
     export default {
-        props: ['fullGame'],
+        props: ['fullGame', 'players'],
         data(){
             return {
                 largeNumbers: [25, 50, 75, 100],
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
                 playingNumbers: [],
                 targetNumber: 0,
-                players: [{name: 'Player One', score: 0}, {name:'Player Two', score: 0}],
+                timerEnded: false,
+                submitClicked: false,
                 currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             }
         },
         methods:{
             resetEverything(){
-                this.playerNumbers = []
+                this.timerEnded = false
+                this.playingNumbers = []
                 this.targetNumber = 0
+                this.submitClicked = false
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+                for (let player of this.players){
+                    player.word = ""
+                }
             },
             declareWinner(playerName, pointsDifference){
                 if (pointsDifference === 0){
@@ -85,22 +95,21 @@ import {eventBus} from '@/main.js'
                 } else {
                     this.declareWinner('Draw', playerOneDifference)
                 }
+                this.submitClicked = true
             })
 
             eventBus.$on('change-timer', (timer) => this.currentTime=timer)
 
             eventBus.$on('next-round', () => {
                 this.resetEverything()
-                this.timerEnded = false
-                this.enteredWords = []
-                for (let player of this.players){
-                    player.word = ""
-                }
+                
             })
 
+            eventBus.$on('timer-finished', () => this.timerEnded = true)
+
+
             eventBus.$on('reset-everything', () => {
-                this.timerEnded = false
-                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+                this.resetEverything()
 
             })
         },
@@ -123,6 +132,16 @@ h2 {
   margin: 0px;
   color: white;
   text-shadow: 0 0 5px #034078;
+  margin-bottom: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+#scores{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 </style>
