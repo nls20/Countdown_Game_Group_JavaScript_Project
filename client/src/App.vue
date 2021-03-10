@@ -25,7 +25,7 @@ import {eventBus} from '@/main.js'
       return {
         game: 0,
         currentRoundNumber: 0,
-        fullGameRounds: ['Letters', 'Letters', 'Numbers', 'Conundrum'],
+        fullGameRounds: ['Letters', 'Numbers', 'Conundrum'],
         fullGame: false,
         players: [{name: 'Player One', word: "", score: 0},{name: 'Player Two', word: "", score: 0}]
       }

@@ -5,10 +5,10 @@
             <h2>NUMBERS ROUND</h2>
             <h2>Player 2: {{players[1].score}}</h2>
         </div>
-        <timer v-if="targetNumber > 0" :times="currentTime"/>
-        <choose-numbers />
+        <timer  v-if="targetNumber > 0 && !timerEnded" :times="currentTime"/>
+        <choose-numbers v-if="targetNumber === 0" />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
-        <submit-answers v-if="targetNumber > 0" />
+        <submit-answers v-if="targetNumber > 0 && timerEnded" />
         <check-answers v-if="submitClicked" :numbers="playingNumbers" :fullGame="fullGame" />
     </section>
 </template>
@@ -29,15 +29,21 @@ import {eventBus} from '@/main.js'
                 smallNumbers: [1, 1, 2, 2, 3, 4, 5, 6, 7, 8, 10, 3, 4, 5, 6, 7, 8, 10],
                 playingNumbers: [],
                 targetNumber: 0,
+                timerEnded: false,
                 submitClicked: false,
                 currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
             }
         },
         methods:{
             resetEverything(){
-                this.playerNumbers = []
+                this.timerEnded = false
+                this.playingNumbers = []
                 this.targetNumber = 0
+                this.submitClicked = false
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+                for (let player of this.players){
+                    player.word = ""
+                }
             },
             declareWinner(playerName, pointsDifference){
                 if (pointsDifference === 0){
@@ -96,19 +102,14 @@ import {eventBus} from '@/main.js'
 
             eventBus.$on('next-round', () => {
                 this.resetEverything()
-                this.timerEnded = false
-                this.enteredWords = []
-                for (let player of this.players){
-                    player.word = ""
-                }
+                
             })
 
+            eventBus.$on('timer-finished', () => this.timerEnded = true)
+
+
             eventBus.$on('reset-everything', () => {
-                this.timerEnded = false
-                this.playingNumbers = []
-                this.targetNumber = 0
-                this.submitClicked = false
-                this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+                this.resetEverything()
 
             })
         },

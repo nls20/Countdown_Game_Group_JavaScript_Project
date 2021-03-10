@@ -7,10 +7,10 @@
           <h2>Player 2: {{players[1].score}}</h2>
         </div>
         
-        <timer v-if="letters.length === 9" :times="currentTime"/>
+        <timer v-if="letters.length === 9 && !timerEnded" :times="currentTime"/>
         <letters-board :letters="letters"/>
         <letter-input v-if="letters.length < 9" />
-        <submit-answers :players="players" :fullGame="fullGame"/>
+        <submit-answers v-if="timerEnded" :players="players" :fullGame="fullGame"/>
       </section>
     </div>
 </template>
@@ -158,7 +158,6 @@ import {eventBus} from '@/main.js'
           player.word = ""
         }
         this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
-
       })
     },
     
