@@ -1,9 +1,5 @@
 <template>
     <section >
-        <!-- <h2 v-if="countdownTimer<10" id="timer">00:0{{countdownTimer}}</h2>
-        <h2 v-if="countdownTimer>=10" id="timer">00:{{countdownTimer}}</h2>
-        <h2 v-if="countdownTimer === 'Time Up'" id="timer">Time Up</h2> -->
-
         <google-chart id="pie-chart" type="PieChart" :options="{legend: 'none', responsive: true, backgroundColor: '#ADD8E6', pieSliceText: 'none', slices:{0: {color: 'white'}, 1: {color: '#D3D3D3'}, 2:{color: 'blue'}}}" :data="times" />
 
   </section>
@@ -19,16 +15,16 @@ import {GChart} from 'vue-google-charts'
         mounted() {
              let changeTimer = setInterval(() => {
                 let newTime = [...this.times]
-                newTime[1][1]++
+                newTime[1][1] += 0.1
                 
                 if (newTime[1][1] === 31){
                     clearInterval(changeTimer)
                     eventBus.$emit('timer-finished')
                 } else {
                     eventBus.$emit('change-timer', newTime)
-                    newTime[2][1]--
+                    newTime[2][1] -=0.1
                 }
-            }, 1000);
+            }, 100);
         },
         components:{
             'google-chart': GChart
