@@ -42,16 +42,15 @@ import {eventBus} from '@/main.js'
         },
         
         methods:{
-            resetEverything(){
-                eventBus.$emit('reset-everything')
-                
+            resetEverything(boolean){
+                eventBus.$emit('reset-everything', boolean)
                 this.calculation = "",
                 this.operator = "",
                 this.firstNumber = 0
             },
 
-            nextRound(){
-                eventBus.$emit('next-round')
+            nextRound(boolean){
+                eventBus.$emit('next-round', boolean)
                 this.resetEverything()
                 },
 
@@ -141,8 +140,19 @@ import {eventBus} from '@/main.js'
                 
             },
             finishedEquals(){
+                this.equals()
                 if (this.calculation === this.targetNumber){
-
+                    if (this.fullGame){
+                        this.nextRound('true')
+                    } else {
+                        this.resetEverything('true')
+                    }
+                } else {
+                    if (this.fullGame){
+                        this.nextRound('false')
+                    } else {
+                        this.resetEverything('false')
+                    }
                 }
             }
         }
