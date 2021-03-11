@@ -11,6 +11,11 @@ import {GChart} from 'vue-google-charts'
     export default {
         name: 'timer',
         props: ['times', 'stopTimer'],
+        data(){
+            return {
+                newTime: []
+            }
+        },
        
         mounted() {
             this.timer()
@@ -26,23 +31,26 @@ import {GChart} from 'vue-google-charts'
             })
         },
         methods: {
-            timer(stopped = false){
-                let changeTimer = setInterval(() => {
-                let newTime = [...this.times]
-                newTime[1][1] += 0.1
-                // console.log('timer', newTime[1][1]  );
-                // if (stopped){
-                //     console.log('stopped timer');
-                //     clearInterval(changeTimer)
-                // } else 
-                if (newTime[1][1] > 3){
-                    clearInterval(changeTimer)
-                    eventBus.$emit('timer-finished')
-                } else {
-                    eventBus.$emit('change-timer', newTime)
-                    newTime[2][1] -=0.1
-                }
-            }, 100);
+                timer(stopped = false){
+                    let changeTimer = setInterval(() => {
+                    this.newTime = [...this.times]
+                    
+                    // console.log('timer', newTime[1][1]  );
+                    if (this.stopTimer == true){
+                        console.log('stopped timer');
+                        clearInterval(changeTimer)
+                        console.log('timer stopped');
+                        eventBus.$emit('timer-stopped', this.newTime)
+                    } else if (this.newTime[1][1] > 3){
+                        clearInterval(changeTimer)
+                        eventBus.$emit('timer-finished')
+                    } else {
+                        eventBus.$emit('change-timer', this.newTime)
+                        this.newTime[2][1] -=0.1
+                        this.newTime[1][1] += 0.1
+                    }
+                }, 100);
+                
             }
         },
         components:{

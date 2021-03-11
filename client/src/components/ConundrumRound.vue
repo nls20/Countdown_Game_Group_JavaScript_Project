@@ -8,7 +8,7 @@
             </div>
             <timer :stopTimer="stopTimer" :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
-            <conundrum-submit v-if="!stopTimer" />
+            <conundrum-submit v-if="correctPlayer.length === 0" :stopTimer="stopTimer" />
             <correct-answer :fullGame="fullGame" v-if="correctPlayer.length > 0" :playerName="correctPlayer"/>
         </section>
     </div>
@@ -32,7 +32,7 @@ export default {
             jumbledWord: "",
             correctPlayer: "",
             stopTimer: false,
-            currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
+            currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]],
         }
     },
 
@@ -50,12 +50,20 @@ export default {
 
     mounted(){
         eventBus.$on('conundrum-answered', (conundrum) => {
-            if (conundrum.word.toUpperCase() == this.word){
-                this.correctPlayer = conundrum.name
+            if (conundrum.word.toUpperCase() === this.word){
+                this.correctPlayer = `${conundrum.name} was correct`
                 this.players.filter((player)=> {
                     if (player.name === conundrum.name){
                         player.score += 10
                         this.stopTimer = true
+                    }
+                })
+            } else {
+                this.players.filter((player) => {
+                    if (player.name !== conundrum.name){
+                        player.score += 10
+                        this.stopTimer = true
+                        this.correctPlayer = `${conundrum.name} was wrong`
                     }
                 })
             }
@@ -65,6 +73,7 @@ export default {
                 this.getConundrumWord()
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
                 this.stopTimer = false
+                this.correctPlayer = ""
 
             })
 

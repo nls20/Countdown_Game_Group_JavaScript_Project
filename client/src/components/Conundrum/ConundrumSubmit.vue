@@ -1,7 +1,8 @@
 <template>
   <div>
-    <!-- <button @click="stopTimer" id="stop-button">Stop Timer</button> -->
+    <button v-if="!stopTimer" @click="stopTimerButton" id="stop-button">Stop Timer</button>
     <!-- <button @click="startTimer" id="stop-button">Start Timer</button> -->
+    <div v-if="stopTimer">
     <form @submit.prevent="submitWords">
       <div id="player-input-form">
         <div class="player-input">
@@ -17,6 +18,7 @@
 
       <input id="submit-button" type="submit" value="Submit Answer">
     </form>
+    </div>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ import {eventBus} from '@/main.js'
 
 export default {
 
-    props:['fullGame'],
+    props:['fullGame', 'stopTimer'],
     data(){
         return {
             playerOneWord: "",
@@ -36,15 +38,15 @@ export default {
     methods: {
         submitWords(){
             let conundrumWord={}
-            if (this.playerOneWord.length === 9){
+            if (this.playerOneWord.length >0){
                 conundrumWord = {name: "Player One", word: this.playerOneWord}
-            } else if (this.playerTwoWord.length === 9){
+            } else if (this.playerTwoWord.length >0){
                 conundrumWord = {name: "Player Two", word: this.playerTwoWord}
             }
             eventBus.$emit('conundrum-answered', conundrumWord)
         },
 
-        stopTimer(){
+        stopTimerButton(){
           eventBus.$emit('stop-timer-button')
         },
 

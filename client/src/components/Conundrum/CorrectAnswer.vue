@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h3>{{playerName}} is correct</h3>
+        <h3>{{playerName}}</h3>
         <button v-if="!fullGame" @click="resetEverything">Reset Conundrum</button>
     </section>
 </template>
