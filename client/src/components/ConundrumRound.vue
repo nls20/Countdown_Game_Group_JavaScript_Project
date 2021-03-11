@@ -6,7 +6,7 @@
                 <h2>CONUNDRUM ROUND</h2>
                 <h2>Player 2: {{players[1].score}}</h2>
             </div>
-            <timer :stopTimer="stopTimer" :times="currentTime"/>
+            <timer v-if="resetTimer" :stopTimer="stopTimer" :times="currentTime"/>
             <letters-board :letters="jumbledWord"/>
             <conundrum-submit v-if="correctPlayer.length === 0" :stopTimer="stopTimer" />
             <correct-answer :fullGame="fullGame" v-if="correctPlayer.length > 0" :playerName="correctPlayer"/>
@@ -33,6 +33,7 @@ export default {
             correctPlayer: "",
             stopTimer: false,
             currentTime: [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]],
+            resetTimer: true
         }
     },
 
@@ -63,7 +64,7 @@ export default {
                     if (player.name !== conundrum.name){
                         player.score += 10
                         this.stopTimer = true
-                        this.correctPlayer = `${conundrum.name} was wrong`
+                        this.correctPlayer = `${conundrum.name} was wrong, the correct answer was ${this.word}`
                     }
                 })
             }
@@ -74,6 +75,8 @@ export default {
                 this.currentTime = [['name', 'time'], ['currentTime', 0], ['timeUnused', 60]]
                 this.stopTimer = false
                 this.correctPlayer = ""
+                this.resetTimer = false
+                this.resetTimer = true
 
             })
 

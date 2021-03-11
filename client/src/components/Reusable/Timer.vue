@@ -13,7 +13,6 @@ import {GChart} from 'vue-google-charts'
         props: ['times', 'stopTimer'],
         data(){
             return {
-                newTime: []
             }
         },
        
@@ -31,7 +30,7 @@ import {GChart} from 'vue-google-charts'
             })
         },
         methods: {
-                timer(stopped = false){
+                timer(){
                     let changeTimer = setInterval(() => {
                     this.newTime = [...this.times]
                     
