@@ -16,32 +16,35 @@
                 <button class="operator-button" @click="times" >X</button>
                 <button class="operator-button" @click="divide" >/</button>
             </div>
-            
-            
+
+            <p>{{typedCalculation}}</p>
         </div>
         
-        <button class="submit-button" @click="equals" >Check Answer</button>
-        <button class="submit-button" v-if="fullGame" @click="nextRound">Next Round</button>
-        <button class="submit-button" v-if="!fullGame" @click="resetEverything">Reset Game</button>
+        <button class="submit-button" @click="finishedEquals" >Check Answer</button>
+        <button class="submit-button" v-if="fullGame && finished" @click="nextRound">Next Round</button>
+        <button class="submit-button" v-if="!fullGame && finished" @click="resetEverything">Reset Game</button>
     </div>
 </template>
 
 <script>
 import {eventBus} from '@/main.js'
     export default {
-        props: ['numbers', 'fullGame'],
+        props: ['numbers', 'targetNumber', 'fullGame'],
 
         data(){
             return {
+                typedCalculation: "",
                 calculation: "",
                 operator: "",
-                firstNumber: 0
+                firstNumber: 0,
+                finished: false
             }
         },
         
         methods:{
             resetEverything(){
                 eventBus.$emit('reset-everything')
+                
                 this.calculation = "",
                 this.operator = "",
                 this.firstNumber = 0
@@ -55,19 +58,22 @@ import {eventBus} from '@/main.js'
             divide(){
                 this.calculation += ' / '
                 this.operator = true
+                this.typedCalculation += ' / '
             },
             add(){
                 this.calculation += ' + '
                 this.operator = '+'
+                this.typedCalculation += ' + '
             },
             minus(){
                 this.calculation += ' - '
                 this.operator = true
+                this.typedCalculation += ' - '
             },
             times(){
                 this.calculation += ' * '
                 this.operator = true
-
+                this.typedCalculation += ' x '
             },
             numberOne(){
                 this.calculation += this.numbers[0]
@@ -77,6 +83,7 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
+                this.typedCalculation += this.numbers[0]
             },
             numberTwo(){
                 this.calculation += this.numbers[1]
@@ -86,6 +93,7 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
+                this.typedCalculation += this.numbers[1]
             },
             numberThree(){
                 this.calculation += this.numbers[2]
@@ -95,7 +103,7 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
-
+                this.typedCalculation += this.numbers[2]
             },
             numberFour(){
                 this.calculation+=this.numbers[3]
@@ -105,7 +113,7 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
-
+                this.typedCalculation += this.numbers[3]
             },
             numberFive(){
                 this.calculation+=this.numbers[4]
@@ -115,7 +123,7 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
-
+                this.typedCalculation += this.numbers[4]
             },
             numberSix(){
                 this.calculation+=this.numbers[5]
@@ -125,12 +133,17 @@ import {eventBus} from '@/main.js'
                     this.firstNumber = this.numbers[0]
                 }
                 this.operator = false
-
+                this.typedCalculation += this.numbers[5]
             },
             equals(){
                 let test = eval(this.calculation)
                 this.calculation = test.toString()
-                console.log(test); 
+                
+            },
+            finishedEquals(){
+                if (this.calculation === this.targetNumber){
+
+                }
             }
         }
         

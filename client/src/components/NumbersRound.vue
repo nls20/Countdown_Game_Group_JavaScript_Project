@@ -8,7 +8,7 @@
         <timer  v-if="targetNumber > 0 && !timerEnded" :times="currentTime"/>
         <choose-numbers v-if="targetNumber === 0" />
         <numbers-board :targetNumber="targetNumber" :numbers="playingNumbers"/>
-        <submit-answers v-if="targetNumber > 0 && timerEnded" />
+        <submit-answers v-if="targetNumber > 0 && timerEnded && !submitClicked" />
         <check-answers v-if="submitClicked" :numbers="playingNumbers" :fullGame="fullGame" />
     </section>
 </template>

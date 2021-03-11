@@ -34,7 +34,6 @@ import {GChart} from 'vue-google-charts'
                     let changeTimer = setInterval(() => {
                     this.newTime = [...this.times]
                     
-                    // console.log('timer', newTime[1][1]  );
                     if (this.stopTimer == true){
                         console.log('stopped timer');
                         clearInterval(changeTimer)
@@ -47,7 +46,7 @@ import {GChart} from 'vue-google-charts'
                         eventBus.$emit('change-timer', this.newTime)
                         this.newTime[2][1] -=0.1
                         this.newTime[1][1] += 0.1
-                    }
+                    }   
                 }, 100);
                 
             }
