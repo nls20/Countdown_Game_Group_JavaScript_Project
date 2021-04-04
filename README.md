@@ -1,4 +1,4 @@
-# countdown_project
+## countdown_project
 
 ## Project setup
 ```
