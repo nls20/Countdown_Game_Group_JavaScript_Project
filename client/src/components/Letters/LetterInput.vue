@@ -12,7 +12,7 @@ import {eventBus} from '@/main.js'
         name: 'letter-input',
         data(){
             return {
-                letterToAdd: "",
+                letterToAdd: "letters",
                 consonants: ['b','b', 'c', 'c', 'd', 'd', 'd', 'd', 'f', 'f', 'g', 'g', 'g', 'g', 'h', 'h', 'j', 'k', 'l', 'l', 'l', 'l', 'l', 'm', 'm', 'm', 'n', 'n', 'n', 'n', 'n', 'p', 'p', 'p', 'q', 'r', 's', 't', 'r', 's', 't', 'r', 's', 't', 'r', 's', 't', 'v', 'w', 'w', 'x', 'y', 'y', 'z'],
                 vowels: ['a', 'e', 'a', 'e', 'a', 'e', 'a', 'e', 'i', 'i', 'i', 'o', 'o', 'o', 'u', 'u']
             }
@@ -28,6 +28,7 @@ import {eventBus} from '@/main.js'
             },
             sendEventBus(){
                 eventBus.$emit('add-letter', this.letterToAdd)
+                
             }
         }
     }
